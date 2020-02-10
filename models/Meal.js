@@ -1,49 +1,50 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const mealSchema = new Schema({
   name: {
     type: String,
-    required: true,
+    required: true
   },
   description: {
     type: String,
-    required: true,
+    required: true
   },
   dishtype: {
     type: String,
-    required: true,
+    required: true
   },
   imgName: String,
   imgPath: String,
   host: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
+    ref: "User",
+    required: true
   },
   price: {
-    type: String,
+    type: String
   },
   reviews: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Review',
-    },
+      ref: "Review"
+    }
   ],
   date: {
     type: Date,
-    required: true,
+    required: true
   },
   time: {
     type: String,
-    required: true,
+    required: true
   },
   guests: {
     type: Number,
-    required: true,
+    required: true
   },
+  coordinates: [Number]
 });
 
-const Meal = mongoose.model('Meal', mealSchema);
+const Meal = mongoose.model("Meal", mealSchema);
 
 module.exports = Meal;

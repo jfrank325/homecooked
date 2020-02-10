@@ -1,27 +1,27 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Meal = require('../models/Meal');
-const User = require('../models/User');
-const Reviews = require('../models/Reviews');
+const Meal = require("../models/Meal");
+const User = require("../models/User");
+const Reviews = require("../models/Reviews");
 
 //login middleware
 const loginCheck = (req, res, next) => {
   if (req.user) {
     next();
   } else {
-    res.redirect('/');
+    res.redirect("/");
   }
 };
 
 //Creating a meal page
-router.get('/meals/create', loginCheck, (req, res) => {
-  res.render('meals/meal-form', { loggedIn: req.user });
+router.get("/meals/create", loginCheck, (req, res) => {
+  res.render("meals/meal-form", { loggedIn: req.user });
 });
 
-router.get('/meals', (req, res, next) => {
+router.get("/meals", (req, res, next) => {
   Meal.find()
     .then(meals => {
-      res.render('meals/list.hbs', { meals, user: req.user });
+      res.render("meals/list.hbs", { meals, user: req.user });
     })
     .catch(err => {
       next(err);
@@ -29,7 +29,7 @@ router.get('/meals', (req, res, next) => {
 });
 
 //Create a meal
-router.post('/meals', loginCheck, (req, res, next) => {
+router.post("/meals", loginCheck, (req, res, next) => {
   const { name, description, dishtype, price, date, time, guests } = req.body;
   Meal.create({
     name,
@@ -39,36 +39,36 @@ router.post('/meals', loginCheck, (req, res, next) => {
     date,
     time,
     guests,
-    host: req.user._id,
+    host: req.user._id
   })
     .then(() => {
-      res.redirect('/meals');
+      res.redirect("/meals");
     })
     .catch(err => {
       next(err);
     });
 });
 
-router.get('/meals/:id', (req, res, next) => {
+router.get("/meals/:id", (req, res, next) => {
   Meal.findById(req.params.id)
     .populate({
-      path: 'host reviews',
+      path: "host reviews",
       populate: {
-        path: 'author',
-      },
+        path: "author"
+      }
     })
     .then(meal => {
       let showDelete = false;
       if (req.user && meal.host._id.toString() === req.user._id.toString()) {
         showDelete = true;
-      } else if (req.user && req.user.role === 'moderator') {
+      } else if (req.user && req.user.role === "moderator") {
         showDelete = true;
       }
 
-      res.render('meals/details.hbs', {
+      res.render("meals/details.hbs", {
         meal,
         showDelete,
-        user: req.user,
+        user: req.user
       });
     })
     .catch(err => {
@@ -76,21 +76,21 @@ router.get('/meals/:id', (req, res, next) => {
     });
 });
 
-router.get('/meals/:id/reviews', (req, res, next) => {
-  console.log('Helo bachend');
+router.get("/meals/:id/reviews", (req, res, next) => {
+  console.log("Helo bachend");
   Meal.findById(req.params.id)
     .populate({
-      path: 'reviews',
+      path: "reviews",
       populate: {
-        path: 'author',
-      },
+        path: "author"
+      }
     })
     .then(meal => {
-      console.log('meal', meal);
+      console.log("meal", meal);
       const reviews = meal.reviews.map(review => {
         return {
           content: review.content,
-          author: review.author.username,
+          author: review.author.username
         };
       });
       res.json(reviews);
@@ -100,14 +100,14 @@ router.get('/meals/:id/reviews', (req, res, next) => {
     });
 });
 
-router.post('/meals/:id/reviews', loginCheck, (req, res, next) => {
+router.post("/meals/:id/reviews", loginCheck, (req, res, next) => {
   const content = req.body.content;
   const author = req.user._id;
   const mealId = req.params.id;
 
   Reviews.create({
     content,
-    author,
+    author
   })
     .then(reviewDocument => {
       const reviewId = reviewDocument._id;
@@ -121,18 +121,44 @@ router.post('/meals/:id/reviews', loginCheck, (req, res, next) => {
     });
 });
 
-router.get('/meals/:id/delete', (req, res, next) => {
+router.get("/meals/:id/delete", (req, res, next) => {
   const query = {
-    _id: req.params.id,
+    _id: req.params.id
   };
 
-  if (req.user.role !== 'moderator') {
+  if (req.user.role !== "moderator") {
     query.owner = req.user._id;
   }
 
   Meal.deleteOne(query)
     .then(() => {
-      res.redirect('/meals');
+      res.redirect("/meals");
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+// patching meal location from frontend
+
+router.patch("/meals/:id", (req, res, next) => {
+  const changes = req.body; // in our axios call on the front-end, we'll make sure to pass the fields that need to be updated
+  Meal.updateOne({ _id: req.params.id }, changes)
+    .then(() => {
+      // successful update, we can send a response
+      res.json();
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+// getting meal coordinates
+
+router.get("/meals/:id/coordinates", (req, res, next) => {
+  Meal.findById(req.params.id) // retrieve the room from the DB
+    .then(mealDocument => {
+      res.json(mealDocument.coordinates); // return as a JSON, the array of coordinates
     })
     .catch(err => {
       next(err);
