@@ -2,13 +2,14 @@
 
 
 <h2>{{meal.name}}</h2>
-<h3>Price (per meal): Euro{{meal.price}}</h3>
+<h3>Price (per meal): Euro {{meal.price}}</h3>
 <p>Description: {{meal.description}}</p>
 <p>Hosted by {{meal.host.username}}</p>
 
+
 <div id='map' style='width: 400px; height: 300px;'></div>
 
-
+<img src="{{meal.imgPath}}" alt="">
 <h2>Reviews</h2>
 <div id='review-box'>
   {{#each meal.reviews}}

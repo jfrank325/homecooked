@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Meal = require("../models/Meal");
-const User = require("../models/User");
-const Reviews = require("../models/Reviews");
+
+const Meal = require('../models/Meal');
+const uploadCloud = require('../config/cloudinary.js');
+const User = require('../models/User');
+const Reviews = require('../models/Reviews');
 
 //login middleware
 const loginCheck = (req, res, next) => {
@@ -29,11 +31,18 @@ router.get("/meals", (req, res, next) => {
 });
 
 //Create a meal
-router.post("/meals", loginCheck, (req, res, next) => {
+router.post('/meals', loginCheck, uploadCloud.single('imgPath'), (req, res, next) => {
+  // const defaultMealImage = 'https://res.cloudinary.com/dv1aih6td/image/upload/v1581345429/Meals/thai_zsh0bk.jpg';
   const { name, description, dishtype, price, date, time, guests } = req.body;
+  console.log(req);
+  const imgPath = req.file.url;
+  console.log(imgPath);
+  const imgName = req.file.originalname;
   Meal.create({
     name,
     description,
+    imgPath,
+    imgName,
     dishtype,
     price,
     date,
