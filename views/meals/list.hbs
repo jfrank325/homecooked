@@ -1,11 +1,13 @@
-<h1>Meals Near You</h1>
 {{#if meals}}
 <h1>Meals Near You</h1>
-<ul>
-  {{#each meals}}
-  <li><a href="/meals/{{_id}}">{{name}} {{price}} euro</a></li>
-  {{/each}}
-</ul>
+<div class="meal-container">
+  <ul>
+    {{#each meals}}
+    <li><a href="/meals/{{_id}}">{{name}} {{price}} euro</a><img src="{{imgPath}}" </li>
+      {{/each}}
+  </ul>
+</div>
+
 {{else}}
 <h1>There are no meals to display</h1>
 {{/if}}
