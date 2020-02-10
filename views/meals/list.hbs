@@ -1,10 +1,13 @@
 {{#if meals}}
-<h1>Meals Near You</h1>
+<h1>Find A Great HomeCooked Meal Near You</h1>
 <div class="meal-container">
   <ul>
-    {{#each meals}}
-    <li><a href="/meals/{{_id}}">{{name}} {{price}} euro</a><img src="{{imgPath}}" </li>
+    <div class="meal-card">
+      {{#each meals}}
+      <a href="/meals/{{_id}}"><img src="{{imgPath}}" alt=""></a>
+      <li><a href="/meals/{{_id}}">{{name}} {{price}} euro</a></li>
       {{/each}}
+    </div>
   </ul>
 </div>
 
