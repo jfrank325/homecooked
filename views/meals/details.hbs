@@ -1,0 +1,29 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+
+
+<h2>{{meal.name}}</h2>
+<h3>Price (per meal): Euro{{meal.price}}</h3>
+<p>Description: {{meal.description}}</p>
+<p>Hosted by {{meal.host.username}}</p>
+
+<h2>Reviews</h2>
+<div id='review-box'>
+  {{#each meal.reviews}}
+  <p>{{content}} <i>{{author.username}}</i></p>
+  {{/each}}
+</div>
+
+{{#if user}}
+<form>
+  <label for="message">Add a review</label>
+  <input type="text" name='content' id='message'>
+  <button type='submit'>Post Your Review</button>
+</form>
+{{/if}}
+
+{{#if showDelete}}
+<a href="/meals/{{meal._id}}/delete">Delete this meal</a>
+{{/if}}
+
+
+<script src='/javascripts/review.js'></script>

@@ -14,7 +14,8 @@ const mealSchema = new Schema({
     type: String,
     required: true,
   },
-  image: String,
+  imgName: String,
+  imgPath: String,
   host: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -23,10 +24,12 @@ const mealSchema = new Schema({
   price: {
     type: String,
   },
-  reviews: {
-    type: Schema.Types.ObjectId,
-    ref: 'Reviews',
-  },
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Review',
+    },
+  ],
   date: {
     type: Date,
     required: true,

@@ -1,8 +1,8 @@
 <h1>Meals Near You</h1>
-{{!-- {{#if mealsList}}
+{{#if meals}}
 <h1>Meals Near You</h1>
 <ul>
-  {{#each mealsList}}
+  {{#each meals}}
   <li><a href="/meals/{{_id}}">{{name}} {{price}} euro</a></li>
   {{/each}}
 </ul>
@@ -13,4 +13,4 @@
 <a href="/">Home</a>
 {{#if user}}
 <a href="/meals/create">Create a meal</a>
-{{/if}} --}}
+{{/if}}
