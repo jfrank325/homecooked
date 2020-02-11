@@ -1,3 +1,6 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+
+
 {{#if meals}}
 <h1>Find A Great HomeCooked Meal Near You</h1>
 <div class="meal-container">
@@ -19,3 +22,55 @@
 {{#if user}}
 <a href="/meals/create">Create a meal</a>
 {{/if}}
+
+<div id='map' style='width: 800px; height: 300px;'></div>
+
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1Ijoib3poYW5uIiwiYSI6ImNrNmdpNW0wejBtajkzbGxycnZteGtjMXUifQ.yg4KXc_Z4OeyRKcY9rnMtw';
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/dark-v10',
+    center: [13.405, 52.52], // starting position
+    zoom: 9, // starting zoom
+
+  });
+
+  // Add zoom and rotation controls to the map.
+  map.addControl(new mapboxgl.NavigationControl());
+
+  const geolocate = new mapboxgl.GeolocateControl({
+    showUserLocation: false,
+    trackUserLocation: true
+  })
+
+  map.addControl(geolocate, 'top-right'); // show the controls on top right of the map
+  let test = true
+
+  axios.get("http://localhost:3000/meals/coordinates")
+    .then(response => {
+      console.log(response.data)
+
+      response.data.forEach(el => {
+        console.log("yayyy", el.location.coordinates)
+        if (el.location.coordinates.length > 0) {
+          const marker = new mapboxgl.Marker();
+          marker.setLngLat(el.location.coordinates);
+          marker.addTo(map);
+        }
+      });
+
+
+
+      marker.on("dragend", (data) => {
+        const coord = data.target.coordinates.getLngLat().toArray()
+        const mealId = location.pathname.split("/")[2];
+
+        axios.patch("http://localhost:3000/meals", { coordinates: coord })
+          .then(() => {
+            console.log("Meal updated!") //meal is updated here!
+          }).catch(err => {
+            console.log(err);
+          })
+      })
+    })
+</script>

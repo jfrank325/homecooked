@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const Meal = require('../models/Meal');
-const uploadCloud = require('../config/cloudinary.js');
-const User = require('../models/User');
-const Reviews = require('../models/Reviews');
+const Meal = require("../models/Meal");
+const uploadCloud = require("../config/cloudinary.js");
+const User = require("../models/User");
+const Reviews = require("../models/Reviews");
 
 //login middleware
 const loginCheck = (req, res, next) => {
@@ -25,38 +25,67 @@ router.get("/meals", (req, res, next) => {
     .then(meals => {
       res.render("meals/list.hbs", { meals, user: req.user });
     })
+
+    .catch(err => {
+      next(err);
+    });
+});
+
+router.get("/meals/coordinates", (req, res, next) => {
+  Meal.find()
+    .then(meals => {
+      res.json(meals); // return as a JSON, the array of coordinates
+    })
+
     .catch(err => {
       next(err);
     });
 });
 
 //Create a meal
-router.post('/meals', loginCheck, uploadCloud.single('imgPath'), (req, res, next) => {
-  // const defaultMealImage = 'https://res.cloudinary.com/dv1aih6td/image/upload/v1581345429/Meals/thai_zsh0bk.jpg';
-  const { name, description, dishtype, price, date, time, guests } = req.body;
-  console.log(req);
-  const imgPath = req.file.url;
-  console.log(imgPath);
-  const imgName = req.file.originalname;
-  Meal.create({
-    name,
-    description,
-    imgPath,
-    imgName,
-    dishtype,
-    price,
-    date,
-    time,
-    guests,
-    host: req.user._id
-  })
-    .then(() => {
-      res.redirect("/meals");
+router.post(
+  "/meals",
+  loginCheck,
+  uploadCloud.single("imgPath"),
+  (req, res, next) => {
+    // const defaultMealImage = 'https://res.cloudinary.com/dv1aih6td/image/upload/v1581345429/Meals/thai_zsh0bk.jpg';
+    const {
+      name,
+      description,
+      dishtype,
+      price,
+      date,
+      time,
+      guests,
+      address
+    } = req.body;
+    console.log(req);
+    // const imgPath = req.file.url;
+    const imgPath = "";
+    console.log(imgPath);
+    // const imgName = req.file.originalname;
+    const imgName = "";
+    Meal.create({
+      name,
+      description,
+      imgPath,
+      imgName,
+      dishtype,
+      price,
+      date,
+      time,
+      guests,
+      address,
+      host: req.user._id
     })
-    .catch(err => {
-      next(err);
-    });
-});
+      .then(() => {
+        res.redirect("/meals");
+      })
+      .catch(err => {
+        next(err);
+      });
+  }
+);
 
 router.get("/meals/:id", (req, res, next) => {
   Meal.findById(req.params.id)
@@ -167,7 +196,7 @@ router.patch("/meals/:id", (req, res, next) => {
 router.get("/meals/:id/coordinates", (req, res, next) => {
   Meal.findById(req.params.id) // retrieve the room from the DB
     .then(mealDocument => {
-      res.json(mealDocument.coordinates); // return as a JSON, the array of coordinates
+      res.json(mealDocument.location.coordinates); // return as a JSON, the array of coordinates
     })
     .catch(err => {
       next(err);

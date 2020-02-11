@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const geocoder = require("../utils/geocoder");
+
 const { Schema } = mongoose;
 
 const mealSchema = new Schema({
@@ -42,7 +44,31 @@ const mealSchema = new Schema({
     type: Number,
     required: true
   },
-  coordinates: [Number]
+  location: {
+    type: {
+      type: String, // Don't do `{ location: { type: String } }`
+      enum: ["Point"] // 'location.type' must be 'Point'
+    },
+    coordinates: {
+      type: [Number]
+    },
+    formattedAddress: String
+  },
+  address: {
+    type: String,
+    required: [true, "Please add an address!"]
+  }
+});
+
+// Geocode and create location
+
+mealSchema.pre("save", async function(next) {
+  const loc = await geocoder.geocode(this.address);
+  this.location = {
+    type: "Point",
+    coordinates: [loc[0].longitude, loc[0].latitude],
+    formattedAddress: loc[0].formattedAddress
+  };
 });
 
 const Meal = mongoose.model("Meal", mealSchema);
