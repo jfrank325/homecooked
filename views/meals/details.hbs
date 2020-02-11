@@ -7,7 +7,7 @@
 <p>Hosted by {{meal.host.username}}</p>
 
 
-<div id='map' style='width: 400px; height: 300px;'></div>
+<div id='map' style='width: 800px; height: 300px;'></div>
 
 <img src="{{meal.imgPath}}" alt="">
 <h2>Reviews</h2>
@@ -37,10 +37,6 @@
     style: 'mapbox://styles/mapbox/dark-v10',
     center: [13.405, 52.52], // starting position
     zoom: 9, // starting zoom
-    maxBounds: [
-      [13.2, 52.4],
-      [13.6, 52.65]
-    ],
   });
 
   // Add zoom and rotation controls to the map.
@@ -57,20 +53,17 @@
   const mealId = location.pathname.split("/")[2]
   axios.get(`http://localhost:3000/meals/${mealId}/coordinates`)
     .then(response => {
+      console.log(response);
       let coordinates = response.data;
       if (!coordinates.length) {
         coordinates = map.getCenter();
       }
-
-      const marker = new mapboxgl.Marker(
-        { draggable: true }
-      );
-
-      market.setLngLat(coordinates);
+      const marker = new mapboxgl.Marker(); //  you can put draggable: true inside
+      marker.setLngLat(coordinates);
       marker.addTo(map);
 
       marker.on("dragend", (data) => {
-        const coord = data.target.getLngLat().toArray()
+        const coord = data.target.coordinates.getLngLat().toArray()
         const mealId = location.pathname.split("/")[2];
 
         axios.patch(`http://localhost:3000/meals/${mealId}`, { coordinates: coord })
@@ -79,8 +72,6 @@
           }).catch(err => {
             console.log(err);
           })
-      }).catch(err => {
-        console.log(err);
       })
     })
 </script>

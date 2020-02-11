@@ -25,6 +25,7 @@ router.get('/meals', (req, res, next) => {
     .then(meals => {
       res.render('meals/list.hbs', { meals, user: req.user });
     })
+
     .catch(err => {
       next(err);
     });
@@ -45,7 +46,7 @@ router.get('/filtered/:mealtype', (req, res, next) => {
 //Create a meal
 router.post('/meals', loginCheck, uploadCloud.single('imgPath'), (req, res, next) => {
   // const defaultMealImage = 'https://res.cloudinary.com/dv1aih6td/image/upload/v1581345429/Meals/thai_zsh0bk.jpg';
-  const { name, description, foodpreference, mealtype, price, date, time, guests } = req.body;
+  const { name, description, foodpreference, mealtype, address, price, date, time, guests } = req.body;
   console.log(req);
   const imgPath = req.file.url;
   console.log(imgPath);
@@ -57,6 +58,7 @@ router.post('/meals', loginCheck, uploadCloud.single('imgPath'), (req, res, next
     imgPath,
     imgName,
     mealtype,
+    address,
     price,
     date,
     time,
@@ -66,6 +68,17 @@ router.post('/meals', loginCheck, uploadCloud.single('imgPath'), (req, res, next
     .then(() => {
       res.redirect('/meals');
     })
+    .catch(err => {
+      next(err);
+    });
+});
+
+router.get('/meals/coordinates', (req, res, next) => {
+  Meal.find()
+    .then(meals => {
+      res.json(meals); // return as a JSON, the array of coordinates
+    })
+
     .catch(err => {
       next(err);
     });
@@ -179,7 +192,7 @@ router.patch('/meals/:id', (req, res, next) => {
 router.get('/meals/:id/coordinates', (req, res, next) => {
   Meal.findById(req.params.id) // retrieve the room from the DB
     .then(mealDocument => {
-      res.json(mealDocument.coordinates); // return as a JSON, the array of coordinates
+      res.json(mealDocument.location.coordinates); // return as a JSON, the array of coordinates
     })
     .catch(err => {
       next(err);
