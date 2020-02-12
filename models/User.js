@@ -12,11 +12,6 @@ const userSchema = new Schema(
         ref: 'Recipe;',
       },
     ],
-    role: {
-      type: String,
-      default: 'basic',
-    enum: ['basic', 'moderator'],
-    },
   },
   {
     timestamps: {

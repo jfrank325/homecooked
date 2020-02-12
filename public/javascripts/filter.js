@@ -10,22 +10,15 @@ if (document.getElementById('filtered')) {
       .then(filteredMeals => {
         console.log('TEST', filteredMeals.data);
         const filteredBox = document.getElementById('filtered-box');
+        filteredBox.classList.add('meal-card');
         filteredBox.innerHTML = '';
         filteredMeals.data.forEach(food => {
           console.log(food);
           const a = document.createElement('a');
           a.href = `/meals/${food._id}`;
-          a.innerHTML = `${food.name}   Euro ${food.price} <img src=${food.imgPath}> </img>`;
-          // const img = document.createElement('img');
-          // img.src = `${food.imgPath}`;
-          // const info = document.createElement('p');
-          // info.innerHTML = `${food.name}`;
-          // const price = document.createElement('p');
-          // price.innerHTML = `Euro ${food.price}`;
+          a.innerHTML = `<img src=${food.imgPath}></img>${food.name}   Euro ${food.price}`;
+          a.classList.add('meal-card');
           filteredBox.appendChild(a);
-          // filteredBox.appendChild(img);
-          // filteredBox.appendChild(info);
-          // filteredBox.appendChild(price);
         });
       })
       .catch(err => {

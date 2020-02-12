@@ -96,8 +96,6 @@ router.get('/meals/:id', (req, res, next) => {
       let showDelete = false;
       if (req.user && meal.host._id.toString() === req.user._id.toString()) {
         showDelete = true;
-      } else if (req.user && req.user.role === 'moderator') {
-        showDelete = true;
       }
       res.render('meals/details.hbs', {
         meal,
@@ -159,11 +157,6 @@ router.get('/meals/:id/delete', (req, res, next) => {
   const query = {
     _id: req.params.id,
   };
-
-  if (req.user.role !== 'moderator') {
-    query.owner = req.user._id;
-  }
-
   Meal.deleteOne(query)
     .then(() => {
       res.redirect('/meals');

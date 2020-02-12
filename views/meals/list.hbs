@@ -17,14 +17,12 @@
 </div>
 
 <div id="filtered-box">
-  <ul>
-    <div class="meal-card">
-      {{#each meals}}
-      <a href="/meals/{{_id}}" id='meal-img'><img src="{{imgPath}}" alt=""></a>
-      <li><a href="/meals/{{_id}}" id='basic-info'>{{name}} {{price}} euro</a></li>
-      {{/each}}
-    </div>
-  </ul>
+  <div class="meal-card">
+    {{#each meals}}
+    <a href="/meals/{{_id}}" id='meal-img'><img src="{{imgPath}}" alt=""></a><br>
+    <p><a href="/meals/{{_id}}" id='basic-info'>{{name}} {{price}} euro</a></p>
+    {{/each}}
+  </div>
 </div>
 
 {{else}}

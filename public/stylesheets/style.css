@@ -1,10 +1,11 @@
 * {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  font-size: 16px; }
 
 body {
   padding: 50px;
-  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+  font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
   background-image: url("../images/family-style.jpg");
   background-position: center;
   background-size: cover;
@@ -17,13 +18,13 @@ a {
 
 h1 {
   text-align: center;
-  font-size: 6em;
+  font-size: 6rem;
   color: #1e911a; }
 
 .navbar {
   display: flex;
   width: 100vw;
-  height: 4em;
+  height: 4rem;
   align-items: center;
   justify-content: space-between;
   padding: 10px 0; }
@@ -36,10 +37,10 @@ h1 {
 .navbar a {
   text-decoration: none;
   padding: 0 20px;
-  font-size: 2em; }
+  font-size: 2rem; }
 
 .navbar img {
-  width: 5em; }
+  width: 5rem; }
 
 .home-container {
   display: flex;
@@ -49,27 +50,28 @@ h1 {
 
 .enter {
   text-align: center;
-  font-size: 6em;
+  font-size: 6rem;
   color: #1e911a;
-  padding-bottom: 5em; }
+  padding-bottom: 5rem; }
 
-.meal-container {
-  display: flex;
-  flex-direction: column; }
-
-.meal-container ul {
-  display: flex;
-  flex-wrap: wrap;
-  text-decoration: none;
-  list-style: none; }
-
-.meal-container ul li {
-  text-decoration: none; }
+#filtered-box {
+  font-size: 2rem; }
 
 .meal-card {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  font-size: 2rem;
+  color: #1e911a; }
+
+.meal-card img {
+  height: 300px; }
+
+.meal-card a {
+  text-decoration: none;
+  color: #1e911a; }
+
+.details-info img {
+  height: 500px; }
 
 /*# sourceMappingURL=style.css.map */
