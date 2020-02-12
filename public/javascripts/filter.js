@@ -16,8 +16,7 @@ if (document.getElementById('filtered')) {
           console.log(food);
           const a = document.createElement('a');
           a.href = `/meals/${food._id}`;
-          a.innerHTML = `<img src=${food.imgPath}></img>${food.name}   Euro ${food.price}`;
-          a.classList.add('meal-card');
+          a.innerHTML = `<img src=${food.image}></img>${food.name}   Euro ${food.price}`;
           filteredBox.appendChild(a);
         });
       })

@@ -15,31 +15,38 @@
     <input type="submit" value="Submit">
   </form>
 </div>
+{{#if user}}
+<p><a id='create-link' href="/meals/create">Click Here </a>to host your own meal!</p>
+{{/if}}
 
-<div id="filtered-box">
-  <div class="meal-card">
-    {{#each meals}}
-    <a href="/meals/{{_id}}" id='meal-img'><img src="{{imgPath}}" alt=""></a><br>
-    <p><a href="/meals/{{_id}}" id='basic-info'>{{name}} {{price}} euro</a></p>
-    {{/each}}
+<div class="list-map-box">
+
+  <div class="meals-container">
+    <div id="filtered-box">
+      {{#each meals}}
+      <div class="meal-card">
+        <a href="/meals/{{_id}}" id='meal-img'><img src="{{image}}" alt=""></a><br>
+        <p><a href="/meals/{{_id}}" id='basic-info'>{{name}} <br>{{price}}</a></p>
+      </div>
+      {{/each}}
+    </div>
   </div>
+  {{else}}
+  <h1>There are no meals to display</h1>
+  {{/if}}
+
+
+
+
+
+
+
+
+  <div id='map' style='width: 800px; height: 300px;'></div>
+
 </div>
 
-{{else}}
-<h1>There are no meals to display</h1>
-{{/if}}
-
-
-
-
 <a href="/">Home</a>
-{{#if user}}
-<a href="/meals/create">Create a meal</a>
-{{/if}}
-
-
-<div id='map' style='width: 800px; height: 300px;'></div>
-
 <script>
   mapboxgl.accessToken = 'pk.eyJ1Ijoib3poYW5uIiwiYSI6ImNrNmdpNW0wejBtajkzbGxycnZteGtjMXUifQ.yg4KXc_Z4OeyRKcY9rnMtw';
   const map = new mapboxgl.Map({
