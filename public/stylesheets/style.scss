@@ -1,6 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   padding: 50px;
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+  background-image: url('../images/family-style.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.8;
 }
 
 a {
@@ -10,6 +20,49 @@ a {
 
 h1 {
   text-align: center;
+  font-size: 6em;
+  color: rgb(30, 145, 26);
+}
+
+.navbar {
+  display: flex;
+  width: 100vw;
+  height: 4em;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  // background: rgb(36, 172, 77, 0.2);
+}
+
+.navbar ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0 20px;
+}
+
+.navbar a {
+  text-decoration: none;
+  padding: 0 20px;
+  font-size: 2em;
+}
+
+.navbar img {
+  width: 5em;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background-repeat: no-repeat;
+}
+
+.enter {
+  text-align: center;
+  font-size: 6em;
+  color: rgb(30, 145, 26);
+  padding-bottom: 5em;
 }
 
 .meal-container {

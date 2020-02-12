@@ -15,14 +15,16 @@
 </head>
 
 <body>
-
-  <nav>
-    <a href="/">Home</a>
-    <a href="/auth/login">Login</a>
-    <a href="/auth/signup">Signup</a>
-    <a href="/auth/logout">Logout</a>
-  </nav>
-
+  <div class='nav-container'>
+    <nav class="navbar">
+      <div class="logo"><a href="/"><img src="../images/logopretty.jpg" alt=""></a></div>
+      <ul>
+        <li><a href="/auth/login">Login</a></li>
+        <li><a href="/auth/signup">Signup</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+      </ul>
+    </nav>
+  </div>
   {{{body}}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
 

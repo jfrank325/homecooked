@@ -20,8 +20,8 @@
   <ul>
     <div class="meal-card">
       {{#each meals}}
-      <a href="/meals/{{_id}}"><img src="{{imgPath}}" alt=""></a>
-      <li><a href="/meals/{{_id}}">{{name}} {{price}} euro</a></li>
+      <a href="/meals/{{_id}}" id='meal-img'><img src="{{imgPath}}" alt=""></a>
+      <li><a href="/meals/{{_id}}" id='basic-info'>{{name}} {{price}} euro</a></li>
       {{/each}}
     </div>
   </ul>

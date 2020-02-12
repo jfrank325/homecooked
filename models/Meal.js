@@ -64,6 +64,7 @@ const mealSchema = new Schema({
     type: String,
     required: [true, 'Please add an address!'],
   },
+  going: [],
 });
 
 // Geocode and create location

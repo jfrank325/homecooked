@@ -12,9 +12,20 @@ if (document.getElementById('filtered')) {
         const filteredBox = document.getElementById('filtered-box');
         filteredBox.innerHTML = '';
         filteredMeals.data.forEach(food => {
+          console.log(food);
           const a = document.createElement('a');
-          a.innerHTML = `${food.name}`;
+          a.href = `/meals/${food._id}`;
+          a.innerHTML = `${food.name}   Euro ${food.price} <img src=${food.imgPath}> </img>`;
+          // const img = document.createElement('img');
+          // img.src = `${food.imgPath}`;
+          // const info = document.createElement('p');
+          // info.innerHTML = `${food.name}`;
+          // const price = document.createElement('p');
+          // price.innerHTML = `Euro ${food.price}`;
           filteredBox.appendChild(a);
+          // filteredBox.appendChild(img);
+          // filteredBox.appendChild(info);
+          // filteredBox.appendChild(price);
         });
       })
       .catch(err => {

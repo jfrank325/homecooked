@@ -1,9 +1,10 @@
-{{#if user}}
-<a href="/auth/logout">Logout</a>
-{{else}}
-<a href="/auth/signup">Signup</a>
-<a href="/auth/login">Login</a>
-{{/if}}
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
-<a href="/meals">Find HomeCooked meals near you!</a>
+<div class="home-container">
+  {{#if user}}
+  <a href="/auth/logout">Logout</a>
+  {{else}}
+  {{!-- <a href="/auth/signup">Signup</a>
+  <a href="/auth/login">Login</a> --}}
+  {{/if}}
+  <h1>{{title}}</h1>
+  <a class='enter' href="/meals">Find HomeCooked meals near you!</a>
+</div>
