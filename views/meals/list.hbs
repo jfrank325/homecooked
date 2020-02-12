@@ -64,11 +64,11 @@
   axios.get("http://localhost:3000/meals/coordinates")
     .then(response => {
       console.log(response.data)
-
+      const marker = new mapboxgl.Marker();
       response.data.forEach(el => {
         console.log("yayyy", el.location.coordinates)
         if (el.location.coordinates.length > 0) {
-          const marker = new mapboxgl.Marker();
+          //const marker = new mapboxgl.Marker();
           marker.setLngLat(el.location.coordinates);
           marker.addTo(map);
         }

@@ -11,8 +11,6 @@
     <img src="{{meal.imgPath}}" alt="">
   </div>
 
-  {{!-- <a href=`/meals/edit/{{meal._id}}` class="edit-button">Edit Your Meal</a> --}}
-
   <h2>Reviews</h2>
   <div id='review-box'>
     {{#each meal.reviews}}
@@ -37,7 +35,14 @@
 
 <div id='map' style='width: 800px; height: 300px;'></div>
 
-<a href="/meals/{{meal._id}}/book">Book This Meal!</a>
+<div id="confirmation">
+  <form action="/meals/mealID" method="POST">
+    <label for="message">Number of Guests</label>
+    <input type="number" name='guest' id='guest'>
+    <button type='submit'>Book your meal!</button>
+  </form>
+</div>
+
 
 <script>
   mapboxgl.accessToken = 'pk.eyJ1Ijoib3poYW5uIiwiYSI6ImNrNmdpNW0wejBtajkzbGxycnZteGtjMXUifQ.yg4KXc_Z4OeyRKcY9rnMtw';
