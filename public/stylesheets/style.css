@@ -6,11 +6,10 @@
 body {
   padding: 50px;
   font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
-  background-image: url("../images/family-style.jpg");
+  background-image: url("../images/family-style02.jpg");
   background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
-  opacity: 0.8; }
+  background-repeat: no-repeat; }
 
 a {
   text-decoration: none;

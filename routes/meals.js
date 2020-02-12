@@ -30,7 +30,7 @@ router.get('/meals', (req, res, next) => {
       next(err);
     });
 });
-
+//Filtering Meals
 router.get('/filtered/:mealtype', (req, res, next) => {
   let foodType = req.params.mealtype;
 
@@ -83,7 +83,7 @@ router.get('/meals/coordinates', (req, res, next) => {
       next(err);
     });
 });
-
+//Get specific meal
 router.get('/meals/:id', (req, res, next) => {
   Meal.findById(req.params.id)
     .populate({
@@ -108,6 +108,56 @@ router.get('/meals/:id', (req, res, next) => {
     });
 });
 
+//Get meal to edit
+router.get('/meals/edit/:id', (req, res, next) => {
+  Meal.findById(req.params.id)
+    .then(meal => {
+      res.render('meals/edit', { meal });
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+//Edit meal
+router.post('/meals/edited', uploadCloud.single('photo'), (req, res, next) => {
+  const { name, description, foodpreference, mealtype, address, price, date, time, guests } = req.body;
+  console.log(req);
+
+  // const imgPath = req.file.url;
+  console.log(imgPath);
+  const imgName = req.file.originalname;
+  Meal.update(
+    { _id: req.query.meal_id },
+    {
+      $set: {
+        name,
+        description,
+        foodpreference,
+        imgPath,
+        imgName,
+        mealtype,
+        address,
+        price,
+        date,
+        time,
+        guests,
+        host: req.user._id,
+      },
+    },
+    {
+      new: true,
+    }
+  )
+    .then(() => {
+      res.redirect('/meals');
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+//Gets the review
 router.get('/meals/:id/reviews', (req, res, next) => {
   console.log('Helo bachend');
   Meal.findById(req.params.id)
@@ -132,6 +182,7 @@ router.get('/meals/:id/reviews', (req, res, next) => {
     });
 });
 
+//Creates a review
 router.post('/meals/:id/reviews', loginCheck, (req, res, next) => {
   const content = req.body.content;
   const author = req.user._id;
@@ -153,6 +204,7 @@ router.post('/meals/:id/reviews', loginCheck, (req, res, next) => {
     });
 });
 
+//Deletes specific meal
 router.get('/meals/:id/delete', (req, res, next) => {
   const query = {
     _id: req.params.id,

@@ -1,0 +1,23 @@
+<h1>Edit Your Meal</h1>
+<form action="/meals/edited" method="POST" enctype='multipart/form-data'>
+  <label for="name">Meal</label>
+  <input type="text" name='name' id='name' value='{{meal.name}}'>
+  <label for='description'>Description</label>
+  <input type="text" name='description' id='description' value='{{meal.description}}'>
+  <label for="mealtype">MealType</label>
+  <input type="text" name='mealtype' id='mealtype' value='{{meal.mealtype}}'>
+  <label for="price">Price</label>
+  <input type="text" name='price' id='price' value='{{meal.price}}'>
+  <label for="date">Date</label>
+  <input type="date" name='date' id='date' value='{{meal.date}}'>
+  <label for="time">Time</label>
+  <input type="text" name='time' id='time' value='{{meal.time}}'>
+  <label for="address">Address</label>
+  <input type="text" name='address' id='address' value='{{meal.address}}'>
+  <label for="guests">Number of Guests</label>
+  <input type="text" name="guests" id="guests" value='{{meal.guests}}'>
+  <label for="image">Image</label>
+  <input type="file" name="photo" value={{meal.imgPath}}>
+  <input type="submit" value="SAVE">
+  <button type='submit'>EDIT This Meal</button>
+</form>
