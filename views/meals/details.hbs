@@ -29,6 +29,14 @@
 <a href="/meals/{{meal._id}}/delete">Delete this meal</a>
 {{/if}}
 
+<div id="confirmation">
+  <form action="/meals/mealID" method="POST">
+  <label for="message">Number of Guests</label>
+  <input type="number" name='guest' id='guest'>
+  <button type='submit'>Book your meal!</button>
+</form>
+</div>
+
 
 <script>
   mapboxgl.accessToken = 'pk.eyJ1Ijoib3poYW5uIiwiYSI6ImNrNmdpNW0wejBtajkzbGxycnZteGtjMXUifQ.yg4KXc_Z4OeyRKcY9rnMtw';

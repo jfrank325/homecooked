@@ -3,7 +3,20 @@
 
 {{#if meals}}
 <h1>Find A Great HomeCooked Meal Near You</h1>
-<div class="meal-container">
+<div class="search-container">
+  <form id='filtered'>
+    <label for="mealtype">Meal Type</label>
+    <select name='mealtype' id="mealtype">
+      <option value="Breakfast">Breakfast</option>
+      <option value="Brunch">Brunch</option>
+      <option value="Lunch">Lunch</option>
+      <option value="Dinner">Dinner</option>
+    </select>
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+<div id="filtered-box">
   <ul>
     <div class="meal-card">
       {{#each meals}}
@@ -17,6 +30,9 @@
 {{else}}
 <h1>There are no meals to display</h1>
 {{/if}}
+
+
+
 
 <a href="/">Home</a>
 {{#if user}}

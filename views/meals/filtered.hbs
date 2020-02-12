@@ -1,0 +1,20 @@
+{{#if meals}}
+<div class="filtered-meal-container">
+  <ul>
+    <div class="meal-card">
+      {{#each meals}}
+      <a href="/meals/{{_id}}"><img src="{{imgPath}}" alt=""></a>
+      <li><a href="/meals/{{_id}}">{{name}} {{price}} euro</a></li>
+      {{/each}}
+    </div>
+  </ul>
+</div>
+
+{{else}}
+<h1>There are no meals to display</h1>
+{{/if}}
+
+<a href="/">Home</a>
+{{#if user}}
+<a href="/meals/create">Create a meal</a>
+{{/if}}

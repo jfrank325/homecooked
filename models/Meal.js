@@ -12,16 +12,22 @@ const mealSchema = new Schema({
     type: String,
     required: true
   },
-  dishtype: {
+  mealtype: {
     type: String,
+    enum: ["Breakfast", "Brunch", "Lunch", "Dinner"],
     required: true
+  },
+  foodpreference: {
+    type: String,
+    enum: ["Vegan", "Vegetarian", "Gluten-Free", "I Eat Everything"]
+    // required: true,
   },
   imgName: String,
   imgPath: String,
   host: {
     type: Schema.Types.ObjectId,
-    ref: "User",
-    required: true
+    ref: "User"
+    // required: true,
   },
   price: {
     type: String
@@ -44,6 +50,10 @@ const mealSchema = new Schema({
     type: Number,
     required: true
   },
+  confirmation: {
+    type: Schema.Types.ObjectId,
+    ref: "User"
+  },
   location: {
     type: {
       type: String, // Don't do `{ location: { type: String } }`
@@ -55,8 +65,8 @@ const mealSchema = new Schema({
     formattedAddress: String
   },
   address: {
-    type: String,
-    required: [true, "Please add an address!"]
+    type: String
+    // required: [true, 'Please add an address!'],
   }
 });
 
