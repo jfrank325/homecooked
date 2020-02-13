@@ -8,16 +8,16 @@
     <div class="details-info-box">
       <h2>{{meal.name}}</h2>
       <h3>Date - {{meal.date}}</h3>
-      <h3>At - {{meal.time}}</h3>
+      <h3>Time - {{meal.time}}</h3>
       <h3>Price (per meal): Euro {{meal.price}}</h3>
       <p>Description: {{meal.description}}</p>
       <p>Hosted by {{meal.host.username}}</p>
     </div>
     <div id="reviews-box-container">
-      <h2>Reviews</h2>
+      <h2 style='font-size:30px;'>Reviews</h2>
       <div id='review-box'>
         {{#each meal.reviews}}
-        <p>{{content}} <i>{{author.username}}</i></p>
+        <p>{{content}} -Review by <i>{{author.username}}</i></p>
         {{/each}}
       </div>
 
@@ -25,7 +25,7 @@
       <form>
         <label for="message">Add a review</label>
         <input type="text" name='content' id='message'>
-        <button type='submit'>Post Your Review</button>
+        <button class='button-style' type='submit'>Post Your Review</button>
       </form>
       {{/if}}
 
@@ -37,14 +37,15 @@
   </div>
 
   <div class="map-confirm-box">
-    <div id='map' style='width: 800px; height: 300px;'></div>
-
     <div id="confirmation">
       <form action="/meals/mealID" method="POST">
         <label for="message">Number of Guests</label>
-        <input type="number" name='guest' id='guest'>
-        <button type='submit'>Book your meal!</button>
+        <input class='select-style' type="number" name='guest' id='guest'>
+        <button class='button-style' type='submit'>Book your meal!</button>
       </form>
+    </div>
+    <div class="map-box">
+      <div id='map' style='width: 800px; height: 300px;'></div>
     </div>
   </div>
 </div>

@@ -107,17 +107,18 @@ h1 {
   font-size: 2rem;
   margin: 2rem;
   padding: 1rem 1rem;
-  width: 450px;
+  width: 360px;
   height: 300px;
   border: 1px solid grey;
   box-shadow: 5px 5px 4px gray;
   // background-color: rgba(119, 221, 119, 0.1);
-  background-color: white;
+  background-color: rgb(241, 228, 228);
   text-align: center;
+  border-radius: 8px;
 }
 
 .meal-card img {
-  height: 240px;
+  height: 200px;
 }
 
 .meal-card a {
@@ -134,7 +135,7 @@ h1 {
 
 #create-link {
   text-align: center;
-  margin: 25px 0;
+  margin-bottom: 25px 0;
   font-size: 2em;
   padding: 1.8rem 6rem;
 }
@@ -142,12 +143,25 @@ h1 {
 .search-container {
   display: flex;
   flex-direction: column;
-  margin: 40px 0;
+  // margin: 15px 0;
   align-items: center;
+  color: #60b0f4;
+}
+
+.search-container label {
+  font-weight: 800;
+  font-size: 30px;
+  color: #0669bd;
+}
+
+.search-container p {
+  font-weight: 800;
+  font-size: 30px;
+  color: #0669bd;
 }
 
 #filtered {
-  margin: 15px 0;
+  // margin: px 0;
 }
 
 #map {
@@ -162,10 +176,10 @@ h1 {
   align-items: center;
 }
 
-.map-box {
-  width: 50%;
-}
-
+// .map-box {
+// width: 50%;
+// }
+//
 .input-field {
   margin-bottom: 2rem;
   padding: 1.3rem;
@@ -184,6 +198,7 @@ h1 {
   padding: 10px;
   margin: 20px 0;
   border-radius: 10px;
+  box-shadow: 5px 5px 4px gray;
 }
 
 .upload-box {
@@ -196,13 +211,24 @@ h1 {
 }
 
 .details-info img {
-  height: 500px;
+  height: 400px;
 }
 
 .details-info-box {
   background-color: rgb(241, 228, 228);
+
+  color: #0669bd;
+  font-size: 20px;
+}
+
+.details-info-box p {
+  font-size: 15px;
+  margin: 10px 0;
   color: #60b0f4;
-  font-size: 5rem;
+}
+
+.img-details-box {
+  background-color: rgb(241, 228, 228);
 }
 
 .details-box {
@@ -217,7 +243,7 @@ h1 {
 }
 
 .details-info-box h2 {
-  font-size: 4rem;
+  font-size: 50px;
   margin-bottom: 20px;
 }
 
@@ -229,8 +255,29 @@ h1 {
 .map-confirm-box form {
   margin-top: 40px;
 }
+
+.map-box {
+  height: 500px;
+  width: 100%;
+}
 #reviews-box-container {
-  background-color: rgb(241, 228, 228);
-  color: #60b0f4;
+  background-color: white;
+  color: #0669bd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 // #reviews-box-container h2 {}
+.select-style {
+  font-weight: 800;
+  padding: 5px;
+  border-radius: 4px;
+  background-color: white;
+  color: #0669bd;
+}
+
+#confirmation label {
+  font-size: 40px;
+  color: #0669bd;
+  font-weight: 800;
+}

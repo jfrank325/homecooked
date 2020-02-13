@@ -88,15 +88,16 @@ h1 {
   font-size: 2rem;
   margin: 2rem;
   padding: 1rem 1rem;
-  width: 450px;
+  width: 360px;
   height: 300px;
   border: 1px solid grey;
   box-shadow: 5px 5px 4px gray;
-  background-color: white;
-  text-align: center; }
+  background-color: #f1e4e4;
+  text-align: center;
+  border-radius: 8px; }
 
 .meal-card img {
-  height: 240px; }
+  height: 200px; }
 
 .meal-card a {
   text-decoration: none;
@@ -109,18 +110,25 @@ h1 {
 
 #create-link {
   text-align: center;
-  margin: 25px 0;
+  margin-bottom: 25px 0;
   font-size: 2em;
   padding: 1.8rem 6rem; }
 
 .search-container {
   display: flex;
   flex-direction: column;
-  margin: 40px 0;
-  align-items: center; }
+  align-items: center;
+  color: #60b0f4; }
 
-#filtered {
-  margin: 15px 0; }
+.search-container label {
+  font-weight: 800;
+  font-size: 30px;
+  color: #0669bd; }
+
+.search-container p {
+  font-weight: 800;
+  font-size: 30px;
+  color: #0669bd; }
 
 #map {
   width: 100%;
@@ -131,9 +139,6 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center; }
-
-.map-box {
-  width: 50%; }
 
 .input-field {
   margin-bottom: 2rem;
@@ -150,7 +155,8 @@ h1 {
   font-weight: 800;
   padding: 10px;
   margin: 20px 0;
-  border-radius: 10px; }
+  border-radius: 10px;
+  box-shadow: 5px 5px 4px gray; }
 
 .upload-box {
   display: flex;
@@ -160,12 +166,20 @@ h1 {
   padding: 20px 30px; }
 
 .details-info img {
-  height: 500px; }
+  height: 400px; }
 
 .details-info-box {
   background-color: #f1e4e4;
-  color: #60b0f4;
-  font-size: 5rem; }
+  color: #0669bd;
+  font-size: 20px; }
+
+.details-info-box p {
+  font-size: 15px;
+  margin: 10px 0;
+  color: #60b0f4; }
+
+.img-details-box {
+  background-color: #f1e4e4; }
 
 .details-box {
   display: flex; }
@@ -177,7 +191,7 @@ h1 {
   margin-right: 40px; }
 
 .details-info-box h2 {
-  font-size: 4rem;
+  font-size: 50px;
   margin-bottom: 20px; }
 
 .map-confirm-box {
@@ -187,8 +201,27 @@ h1 {
 .map-confirm-box form {
   margin-top: 40px; }
 
+.map-box {
+  height: 500px;
+  width: 100%; }
+
 #reviews-box-container {
-  background-color: #f1e4e4;
-  color: #60b0f4; }
+  background-color: white;
+  color: #0669bd;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.select-style {
+  font-weight: 800;
+  padding: 5px;
+  border-radius: 4px;
+  background-color: white;
+  color: #0669bd; }
+
+#confirmation label {
+  font-size: 40px;
+  color: #0669bd;
+  font-weight: 800; }
 
 /*# sourceMappingURL=style.css.map */

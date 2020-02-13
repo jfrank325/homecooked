@@ -6,13 +6,13 @@
 <div class="search-container">
   <form id='filtered'>
     <label for="mealtype">Search by Meal Type</label>
-    <select name='mealtype' id="mealtype">
+    <select class='select-style' name='mealtype' id="mealtype">
       <option value="Breakfast">Breakfast</option>
       <option value="Brunch">Brunch</option>
       <option value="Lunch">Lunch</option>
       <option value="Dinner">Dinner</option>
     </select>
-    <input type="submit" value="Submit">
+    <input class='button-style' type="submit" value="Submit">
   </form>
   <p>Or...</p>
   <a id='create-link' class='button-style' href="/meals/create">Host Your Own Meal </a>
@@ -44,7 +44,6 @@
 
 </div>
 
-<a href="/">Home</a>
 <script>
   mapboxgl.accessToken = 'pk.eyJ1Ijoib3poYW5uIiwiYSI6ImNrNmdpNW0wejBtajkzbGxycnZteGtjMXUifQ.yg4KXc_Z4OeyRKcY9rnMtw';
   const map = new mapboxgl.Map({
