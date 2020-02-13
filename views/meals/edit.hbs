@@ -1,23 +1,25 @@
-<h1>Edit Your Meal</h1>
+<h1 style='margin-bottom:45px;'>Edit Your Meal</h1>
 <form action="/meals/edited/{{meal._id}}" method="POST" enctype='multipart/form-data'>
-  <label for="name">Meal</label>
-  <input type="text" name='name' id='name' value='{{meal.name}}'>
-  <label for='description'>Description</label>
-  <input type="text" name='description' id='description' value='{{meal.description}}'>
-  <label for="mealtype">MealType</label>
-  <input type="text" name='mealtype' id='mealtype' value='{{meal.mealtype}}'>
-  <label for="price">Price</label>
-  <input type="text" name='price' id='price' value='{{meal.price}}'>
-  <label for="date">Date</label>
-  <input type="date" name='date' id='date' value='{{meal.date}}'>
-  <label for="time">Time</label>
-  <input type="text" name='time' id='time' value='{{meal.time}}'>
-  <label for="address">Address</label>
-  <input type="text" name='address' id='address' value='{{meal.address}}'>
-  <label for="guests">Number of Guests</label>
-  <input type="text" name="guests" id="guests" value='{{meal.guests}}'>
-  <label for="image">Image</label>
-  <input type="file" name="photo" value={{meal.image}}>
-  <input type="submit" value="SAVE">
-  <button type='submit'>EDIT This Meal</button>
+  <div class="meal-form-container">
+    <div class='in-box'> <label class='label-style' for="name">Meal</label>
+      <input class='input-field' type="text" name='name' id='name' value='{{meal.name}}'></div>
+    <div class='in-box'> <label class='label-style' for='description'>Description</label>
+      <input class='input-field' type="text" name='description' id='description' value='{{meal.description}}'></div>
+    <div class='in-box'> <label class='label-style' for="mealtype">MealType</label>
+      <input class='input-field' type="text" name='mealtype' id='mealtype' value='{{meal.mealtype}}'></div>
+    <div class='in-box'> <label class='label-style' for="price">Price</label>
+      <input class='input-field' type="text" name='price' id='price' value='{{meal.price}}'></div>
+    <div class='in-box'> <label class='label-style' for="date">Date</label>
+      <input class='input-field' type="date" name='date' id='date' value='{{meal.date}}'></div>
+    <div class='in-box'> <label class='label-style' for="time">Time</label>
+      <input class='input-field' type="text" name='time' id='time' value='{{meal.time}}'></div>
+    <div class='in-box'> <label class='label-style' for="address">Address</label>
+      <input class='input-field' type="text" name='address' id='address' value='{{meal.address}}'></div>
+    <div class='in-box'> <label class='label-style' for="guests">Number of Guests</label>
+      <input class='input-field' type="text" name="guests" id="guests" value='{{meal.guests}}'></div>
+    <div class='in-box'> <label class='label-style' for="image">Image</label>
+      <input class='input-field' type="file" name="photo" value={{meal.image}}>
+      <input class='button-style' type="submit" value="SAVE">
+      <button class='button-style' type='submit'>EDIT This Meal</button>
 </form>
+</div>

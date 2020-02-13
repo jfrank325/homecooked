@@ -1,10 +1,10 @@
 <div>
-  MY PROFILE
-  {{user.username}}
+
+  <h1>{{user.username}}'s Booked Meals</h1>
   {{#each user.events}}
-  <p>{{this.name}}</p>
+  {{!-- <p>{{this.name}}</p> --}}
   <div id="filtered-box">
-    <div class="meals-container">
+    <div class="meal-card">
       <a href="/meals/{{_id}}" id='meal-img'><img src="{{this.image}}" alt=""></a><br>
       <p><a href="/meals/{{_id}}" id='basic-info'>{{this.name}} <br>{{this.price}}</a></p>
     </div>

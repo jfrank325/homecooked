@@ -80,6 +80,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+  flex-wrap: wrap;
   width: 100vw;
   // position: relative;
 }
@@ -142,10 +143,18 @@ h1 {
 
 .search-container {
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   // margin: 15px 0;
+  justify-content: space-evenly;
   align-items: center;
   color: #60b0f4;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 50%;
 }
 
 .search-container label {
@@ -158,6 +167,7 @@ h1 {
   font-weight: 800;
   font-size: 30px;
   color: #0669bd;
+  margin: 0 20px;
 }
 
 #filtered {
@@ -173,13 +183,18 @@ h1 {
 .meal-form-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
+  width: 50%;
 }
 
 // .map-box {
 // width: 50%;
 // }
 //
+.in-box {
+  display: flex;
+}
+
 .input-field {
   margin-bottom: 2rem;
   padding: 1.3rem;
@@ -187,8 +202,9 @@ h1 {
 
 .label-style {
   font-size: 1.4rem;
-  color: #60b0f4;
+  color: #0669bd;
   font-weight: 800;
+  margin-right: 15px;
 }
 
 .button-style {
@@ -250,6 +266,7 @@ h1 {
 .map-confirm-box {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .map-confirm-box form {
@@ -261,8 +278,8 @@ h1 {
   width: 100%;
 }
 #reviews-box-container {
-  background-color: white;
-  color: #0669bd;
+  background-color: #0669bd;
+  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
