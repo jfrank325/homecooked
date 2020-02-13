@@ -72,7 +72,7 @@ h1 {
   height: 300px;
   border: 1px solid grey;
   box-shadow: 5px 5px 4px gray;
-  background-color: rgba(119, 221, 119, 0.1);
+  background-color: white;
   text-align: center; }
 
 .meal-card img {
@@ -92,15 +92,39 @@ h1 {
   height: 500px; }
 
 #create-link {
-  color: #135312;
-  border: 1px solid grey;
-  box-shadow: 3px 3px 2px gray;
-  background-color: rgba(119, 221, 119, 0.1);
-  font-weight: 800;
-  font-size: 1.5rem; }
+  text-align: center;
+  margin: 25px 0; }
 
 #map {
   height: 500px;
   width: 500px; }
+
+.meal-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.input-field {
+  margin-bottom: 2rem;
+  padding: 1.3rem; }
+
+.label-style {
+  font-size: 1.4rem;
+  color: #135312;
+  font-weight: 800; }
+
+.button-style {
+  background-color: #135312;
+  color: white;
+  font-weight: 800;
+  padding: 10px;
+  margin: 20px 0;
+  border-radius: 10px; }
+
+.upload-box {
+  display: flex; }
+
+#submit {
+  padding: 20px 30px; }
 
 /*# sourceMappingURL=style.css.map */
