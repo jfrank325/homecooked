@@ -1,54 +1,53 @@
-const mongoose = require("mongoose");
-const geocoder = require("../utils/geocoder");
+const mongoose = require('mongoose');
+const geocoder = require('../utils/geocoder');
 
 const { Schema } = mongoose;
 
 const mealSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
   mealtype: {
     type: String,
-    enum: ["Breakfast", "Brunch", "Lunch", "Dinner"],
-    required: true
+    enum: ['Breakfast', 'Brunch', 'Lunch', 'Dinner'],
+    required: true,
   },
   foodpreference: {
     type: String,
-    enum: ["Vegan", "Vegetarian", "Gluten-Free", "I Eat Everything"]
+    enum: ['Vegan', 'Vegetarian', 'Gluten-Free', 'I Eat Everything'],
     // required: true,
   },
-  imgName: String,
-  imgPath: String,
+  image: String,
   host: {
     type: Schema.Types.ObjectId,
-    ref: "User"
+    ref: 'User',
     // required: true,
   },
   price: {
-    type: String
+    type: String,
   },
   reviews: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Review"
-    }
+      ref: 'Review',
+    },
   ],
   date: {
     type: Date,
-    required: true
+    required: true,
   },
   time: {
     type: String,
-    required: true
+    required: true,
   },
   guests: {
     type: Number,
-    required: true
+    required: true,
   },
   confirmation: [
     {
@@ -59,30 +58,30 @@ const mealSchema = new Schema({
   location: {
     type: {
       type: String, // Don't do `{ location: { type: String } }`
-      enum: ["Point"] // 'location.type' must be 'Point'
+      enum: ['Point'], // 'location.type' must be 'Point'
     },
     coordinates: {
-      type: [Number]
+      type: [Number],
     },
-    formattedAddress: String
+    formattedAddress: String,
   },
   address: {
-    type: String
+    type: String,
     // required: [true, 'Please add an address!'],
-  }
+  },
 });
 
 // Geocode and create location
 
-mealSchema.pre("save", async function(next) {
+mealSchema.pre('save', async function(next) {
   const loc = await geocoder.geocode(this.address);
   this.location = {
-    type: "Point",
+    type: 'Point',
     coordinates: [loc[0].longitude, loc[0].latitude],
-    formattedAddress: loc[0].formattedAddress
+    formattedAddress: loc[0].formattedAddress,
   };
 });
 
-const Meal = mongoose.model("Meal", mealSchema);
+const Meal = mongoose.model('Meal', mealSchema);
 
 module.exports = Meal;

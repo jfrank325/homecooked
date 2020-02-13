@@ -1,9 +1,9 @@
 {{#if meals}}
-<div class="filtered-meal-container">
+<div class="meal-container">
   <ul>
     <div class="meal-card">
       {{#each meals}}
-      <a href="/meals/{{_id}}"><img src="{{imgPath}}" alt=""></a>
+      <a href="/meals/{{_id}}"><img src="{{image}}" alt=""></a>
       <li><a href="/meals/{{_id}}">{{name}} {{price}} euro</a></li>
       {{/each}}
     </div>

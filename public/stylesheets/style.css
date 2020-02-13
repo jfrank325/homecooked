@@ -17,8 +17,8 @@ a {
 
 h1 {
   text-align: center;
-  font-size: 6rem;
-  color: #1e911a; }
+  font-size: 4rem;
+  color: #135312; }
 
 .navbar {
   display: flex;
@@ -50,27 +50,81 @@ h1 {
 .enter {
   text-align: center;
   font-size: 6rem;
-  color: #1e911a;
+  color: #186916;
   padding-bottom: 5rem; }
 
 #filtered-box {
-  font-size: 2rem; }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap; }
 
 .meal-card {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   font-size: 2rem;
-  color: #1e911a; }
+  margin: 2rem;
+  padding: 1rem 1rem;
+  width: 300px;
+  height: 300px;
+  border: 1px solid grey;
+  box-shadow: 5px 5px 4px gray;
+  background-color: white;
+  text-align: center; }
 
 .meal-card img {
-  height: 300px; }
+  height: 200px; }
 
 .meal-card a {
   text-decoration: none;
-  color: #1e911a; }
+  color: #135312;
+  font-weight: 800;
+  font-size: 1.5rem; }
+
+.list-map-box {
+  display: flex;
+  align-items: flex-start; }
 
 .details-info img {
   height: 500px; }
+
+#create-link {
+  text-align: center;
+  margin: 25px 0; }
+
+#map {
+  height: 500px;
+  width: 500px; }
+
+.meal-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.input-field {
+  margin-bottom: 2rem;
+  padding: 1.3rem; }
+
+.label-style {
+  font-size: 1.4rem;
+  color: #135312;
+  font-weight: 800; }
+
+.button-style {
+  background-color: #135312;
+  color: white;
+  font-weight: 800;
+  padding: 10px;
+  margin: 20px 0;
+  border-radius: 10px; }
+
+.upload-box {
+  display: flex; }
+
+#submit {
+  padding: 20px 30px; }
 
 /*# sourceMappingURL=style.css.map */

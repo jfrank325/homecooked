@@ -18,19 +18,19 @@ const loginCheck = (req, res, next) => {
 router.post("/meals/confirmation/:id", loginCheck, (req, res, next) => {
   console.log("TESSSST");
   const mealId = req.params.id;
-  if(confirmation.length < guests){
-  Meal.findByIdAndUpdate(
-    { _id: mealId },
-    { $addToSet: { confirmation: req.user._id } },
-    { new: true }
-  )
-    .then(meal => {
-      console.log(meal);
-      res.redirect("/");
-    })
-    .catch(err => {
-      next(err);
-    });
+  if (confirmation.length < guests) {
+    Meal.findByIdAndUpdate(
+      { _id: mealId },
+      { $addToSet: { confirmation: req.user._id } },
+      { new: true }
+    )
+      .then(meal => {
+        console.log(meal);
+        res.redirect("/");
+      })
+      .catch(err => {
+        next(err);
+      });
   }
 });
 
@@ -68,7 +68,8 @@ router.post(
   loginCheck,
   uploadCloud.single("imgPath"),
   (req, res, next) => {
-    // const defaultMealImage = 'https://res.cloudinary.com/dv1aih6td/image/upload/v1581345429/Meals/thai_zsh0bk.jpg';
+    const defaultMealImage =
+      "https://res.cloudinary.com/dv1aih6td/image/upload/v1581345429/Meals/thai_zsh0bk.jpg";
     const {
       name,
       description,
@@ -81,15 +82,13 @@ router.post(
       guests
     } = req.body;
     console.log(req);
-    const imgPath = req.file.url;
+    const imgPath = req.file ? req.file.url : defaultMealImage;
     console.log(imgPath);
-    const imgName = req.file.originalname;
     Meal.create({
       name,
       description,
       foodpreference,
-      imgPath,
-      imgName,
+      image: imgPath,
       mealtype,
       address,
       price,
@@ -98,6 +97,9 @@ router.post(
       guests,
       host: req.user._id
     })
+      .then(() => {
+        res.redirect("/meals");
+      })
       .then(() => {
         res.redirect("/meals");
       })
@@ -154,52 +156,55 @@ router.get("/meals/edit/:id", (req, res, next) => {
 });
 
 //Edit meal
-router.post("/meals/edited", uploadCloud.single("photo"), (req, res, next) => {
-  const {
-    name,
-    description,
-    foodpreference,
-    mealtype,
-    address,
-    price,
-    date,
-    time,
-    guests
-  } = req.body;
-  console.log(req);
-
-  // const imgPath = req.file.url;
-  console.log(imgPath);
-  const imgName = req.file.originalname;
-  Meal.update(
-    { _id: req.query.meal_id },
-    {
-      $set: {
-        name,
-        description,
-        foodpreference,
-        imgPath,
-        imgName,
-        mealtype,
-        address,
-        price,
-        date,
-        time,
-        guests,
-        host: req.user._id
+router.post(
+  "/meals/edited/:id",
+  uploadCloud.single("photo"),
+  async (req, res, next) => {
+    const {
+      name,
+      description,
+      foodpreference,
+      mealtype,
+      address,
+      price,
+      date,
+      time,
+      guests
+    } = req.body;
+    console.log(req.body);
+    const mealId = req.params.id;
+    let meal = await Meal.findById(req.params.id);
+    let mealImagePath = meal.image;
+    let imagePath = req.file ? req.file.url : mealImagePath;
+    Meal.findByIdAndUpdate(
+      { _id: mealId },
+      {
+        $set: {
+          name,
+          description,
+          foodpreference,
+          image: imagePath,
+          mealtype,
+          address,
+          price,
+          date,
+          time,
+          guests,
+          host: req.user._id
+        }
+      },
+      {
+        new: true
       }
-    },
-    {
-      new: true
-    }
-  )
-    .then(() => {
-      res.redirect("/meals");
-    })
-    .catch(err => {
-      next(err);
-    });
-});
+    )
+      .then(() => {
+        res.redirect("/meals");
+      })
+      .catch(err => {
+        next(err);
+      });
+  }
+);
 
 //Gets the review
 router.get("/meals/:id/reviews", (req, res, next) => {

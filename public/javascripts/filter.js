@@ -10,14 +10,14 @@ if (document.getElementById('filtered')) {
       .then(filteredMeals => {
         console.log('TEST', filteredMeals.data);
         const filteredBox = document.getElementById('filtered-box');
-        filteredBox.classList.add('meal-card');
+        // filteredBox.classList.add('meal-card');
         filteredBox.innerHTML = '';
         filteredMeals.data.forEach(food => {
           console.log(food);
           const a = document.createElement('a');
           a.href = `/meals/${food._id}`;
-          a.innerHTML = `<img src=${food.imgPath}></img>${food.name}   Euro ${food.price}`;
-          a.classList.add('meal-card');
+          a.innerHTML = `<img src=${food.image}></img>${food.name}   Euro ${food.price}`;
+          filteredBox.classList.add('meal-card');
           filteredBox.appendChild(a);
         });
       })
