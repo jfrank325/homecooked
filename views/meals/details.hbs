@@ -19,7 +19,7 @@
   </div>
 
   {{#if user}}
-  <form>
+  <form id="review-form">
     <label for="message">Add a review</label>
     <input type="text" name='content' id='message'>
     <button type='submit'>Post Your Review</button>
@@ -35,7 +35,7 @@
 
 <div id='map' style='width: 800px; height: 300px;'></div>
 <div id="confirmation">
-  <form action="/meals/confirmation/{{meal._id}}" method="post">
+  <form action="/user/{{meal._id}}/events" method="post">
     <button type='submit'>Book your meal!</button>
   </form>
 </div>

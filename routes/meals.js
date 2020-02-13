@@ -31,6 +31,8 @@ router.post("/meals/confirmation/:id", loginCheck, (req, res, next) => {
       .catch(err => {
         next(err);
       });
+  } else {
+    console.log("This event is fully booked!");
   }
 });
 
@@ -281,7 +283,7 @@ router.patch("/meals/:id", (req, res, next) => {
     });
 });
 
-// getting meal coordinates
+// getting meal coordinates for one event
 
 router.get("/meals/:id/coordinates", (req, res, next) => {
   Meal.findById(req.params.id) // retrieve the room from the DB
@@ -293,6 +295,43 @@ router.get("/meals/:id/coordinates", (req, res, next) => {
     });
 });
 
-// creates new meal booking and updates confirmation
+// getting meal coordinates for listing page
+
+router.get("/meals/coordinates", (req, res, next) => {
+  Meal.find()
+    .then(locations => {
+      res.json(locations.location);
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+// creates new meal booking and updates confirmation or event page of the profile
+
+router.post("/user/:id/events", (req, res, next) => {
+  const mealId = req.params.id;
+
+  User.updateOne({_id: req.user._id}, {$push: {events: mealId }})
+  .then(response => {
+    res.send(response);
+  })
+  .catch(err => {
+    next(err)
+  })
+})
+
+router.get("/user/:id/events/delete", loginCheck, (req, res) => {
+  const eventId = req.params.id;
+  console.log(req.user);
+  User.updateOne({ _id: req.user._id }, { $pull: { events: meal._id } })
+    .then(response => {
+      console.log(response);
+      res.send(response);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
 
 module.exports = router;

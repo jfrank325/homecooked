@@ -78,7 +78,7 @@
       const popup = new mapboxgl.Popup({ className: "locationpopup" });
       // popup.setLngLat(map.getCenter());
       popup.setHTML(
-        `<div> <a href="/meals/${meal._id}">${location.name}</a></div>`
+        `<div> <a href="/meals">${location.name}</a></div>`
       );
       marker.setPopup(popup);
       marker.on("dragend", data => {
@@ -89,7 +89,7 @@
       // const coord = data.target.coordinates.getLngLat().toArray()
       // const mealId = location.pathname.split("/")[2]; })
 
-      
+
       axios.patch("http://localhost:3000/meals", { coordinates: coord })
         .then(() => {
           console.log("Meal updated!") //meal is updated here!
