@@ -2,36 +2,40 @@
 
 <div class="details-box">
   <div class="details-info">
-    <img src="{{meal.image}}" alt="Image of Your Meal">
-    <h2>{{meal.name}}</h2>
-    <h3>Date - {{meal.date}}</h3>
-    <h3>At - {{meal.time}}</h3>
-    <h3>Price (per meal): Euro {{meal.price}}</h3>
-    <p>Description: {{meal.description}}</p>
-    <p>Hosted by {{meal.host.username}}</p>
-
-
-    <h2>Reviews</h2>
-    <div id='review-box'>
-      {{#each meal.reviews}}
-      <p>{{content}} <i>{{author.username}}</i></p>
-      {{/each}}
+    <div class="img-details-box">
+      <img src="{{meal.image}}" alt="Image of Your Meal">
     </div>
+    <div class="details-info-box">
+      <h2>{{meal.name}}</h2>
+      <h3>Date - {{meal.date}}</h3>
+      <h3>At - {{meal.time}}</h3>
+      <h3>Price (per meal): Euro {{meal.price}}</h3>
+      <p>Description: {{meal.description}}</p>
+      <p>Hosted by {{meal.host.username}}</p>
+    </div>
+    <div id="reviews-box-container">
+      <h2>Reviews</h2>
+      <div id='review-box'>
+        {{#each meal.reviews}}
+        <p>{{content}} <i>{{author.username}}</i></p>
+        {{/each}}
+      </div>
 
-    {{#if user}}
-    <form>
-      <label for="message">Add a review</label>
-      <input type="text" name='content' id='message'>
-      <button type='submit'>Post Your Review</button>
-    </form>
-    {{/if}}
+      {{#if user}}
+      <form>
+        <label for="message">Add a review</label>
+        <input type="text" name='content' id='message'>
+        <button type='submit'>Post Your Review</button>
+      </form>
+      {{/if}}
 
-    {{#if showDelete}}
-    <a href="/meals/{{meal._id}}/delete">Delete this meal</a>
-    <a href="/meals/edit/{{meal._id}}">Edit this meal</a>
-
-    {{/if}}
+      {{#if showDelete}}
+      <a href="/meals/{{meal._id}}/delete">Delete this meal</a>
+      <a href="/meals/edit/{{meal._id}}">Edit this meal</a>
+      {{/if}}
+    </div>
   </div>
+
   <div class="map-confirm-box">
     <div id='map' style='width: 800px; height: 300px;'></div>
 

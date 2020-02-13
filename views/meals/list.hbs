@@ -5,7 +5,7 @@
 <h1>Find A Great HomeCooked Meal Near You</h1>
 <div class="search-container">
   <form id='filtered'>
-    <label for="mealtype">Meal Type</label>
+    <label for="mealtype">Search by Meal Type</label>
     <select name='mealtype' id="mealtype">
       <option value="Breakfast">Breakfast</option>
       <option value="Brunch">Brunch</option>
@@ -14,7 +14,10 @@
     </select>
     <input type="submit" value="Submit">
   </form>
+  <p>Or...</p>
+  <a id='create-link' class='button-style' href="/meals/create">Host Your Own Meal </a>
 </div>
+
 {{!-- {{#if user}}
 <p><a id='create-link' class='button-style' href="/meals/create">Click Here </a>to host your own meal!</p>
 {{/if}} --}}
@@ -48,7 +51,7 @@
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v10',
     center: [13.405, 52.52], // starting position
-    zoom: 9, // starting zoom
+    zoom: 11, // starting zoom
 
   });
 
@@ -67,27 +70,35 @@
     .then(response => {
       console.log(response.data)
       const marker = new mapboxgl.Marker();
-      response.data.forEach(el => {
-        console.log("yayyy", el.location.coordinates)
-        if (el.location.coordinates.length > 0) {
-          const marker = new mapboxgl.Marker();
-          marker.setLngLat(el.location.coordinates);
-          marker.addTo(map);
-        }
+      let locations = response.data; // the array of coordinates that we are sending from our backend route
+      response.data.forEach(location => {
+        console.log("yayyy", location.location.coordinates)
+        let marker = new mapboxgl.Marker();
+        marker.setLngLat(location.location.coordinates);
+        marker.addTo(map);
       });
 
+      const popup = new mapboxgl.Popup({ className: "locationpopup" });
+      // popup.setLngLat(map.getCenter());
+      popup.setHTML(
+        `<div> <a href="/meals/${meal._id}">${location.name}</a></div>`
+      );
+      marker.setPopup(popup);
+      marker.on("dragend", data => {
+        const coord = data.location.coordinates;
+      });
+
+      // marker.on("dragend", (data) => {
+      // const coord = data.target.coordinates.getLngLat().toArray()
+      // const mealId = location.pathname.split("/")[2]; })
 
 
-      marker.on("dragend", (data) => {
-        const coord = data.target.coordinates.getLngLat().toArray()
-        const mealId = location.pathname.split("/")[2];
+      axios.patch("http://localhost:3000/meals", { coordinates: coord })
+        .then(() => {
+          console.log("Meal updated!") //meal is updated here!
+        }).catch(err => {
+          console.log(err);
+        })
 
-        axios.patch("http://localhost:3000/meals", { coordinates: coord })
-          .then(() => {
-            console.log("Meal updated!") //meal is updated here!
-          }).catch(err => {
-            console.log(err);
-          })
-      })
     })
 </script>

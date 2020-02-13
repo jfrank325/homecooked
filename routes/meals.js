@@ -15,7 +15,22 @@ const loginCheck = (req, res, next) => {
   }
 };
 
-//Show a meals page
+router.post('/meals/confirmation/:id', loginCheck, (req, res, next) => {
+  console.log('TESSSST');
+  const mealId = req.params.id;
+  if (confirmation.length < guests) {
+    Meal.findByIdAndUpdate({ _id: mealId }, { $addToSet: { confirmation: req.user._id } }, { new: true })
+      .then(meal => {
+        console.log(meal);
+        res.redirect('/');
+      })
+      .catch(err => {
+        next(err);
+      });
+  }
+});
+
+//Creating a meal page
 router.get('/meals/create', loginCheck, (req, res) => {
   res.render('meals/meal-form', { loggedIn: req.user });
 });
@@ -63,6 +78,9 @@ router.post('/meals', loginCheck, uploadCloud.single('imgPath'), (req, res, next
     guests,
     host: req.user._id,
   })
+    .then(() => {
+      res.redirect('/meals');
+    })
     .then(() => {
       res.redirect('/meals');
     })
@@ -240,5 +258,7 @@ router.get('/meals/:id/coordinates', (req, res, next) => {
       next(err);
     });
 });
+
+// creates new meal booking and updates confirmation
 
 module.exports = router;
