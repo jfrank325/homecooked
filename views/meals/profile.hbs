@@ -3,10 +3,33 @@
   {{user.username}}
   {{#each user.events}}
   <p>{{this.name}}</p>
-  <p>{{this.description}}</p>
-  {{/each}}
-</div>
-
+  <div id="filtered-box">
+    <div class="meals-container">
+      <a href="/meals/{{_id}}" id='meal-img'><img src="{{this.image}}" alt=""></a><br>
+      <p><a href="/meals/{{_id}}" id='basic-info'>{{this.name}} <br>{{this.price}}</a></p>
+    </div>
+    {{/each}}
+  </div>
+  {{!-- 
 <h1>
 
-</h1>
+</h1> --}}
+
+  {{!-- 
+<div id="filtered-box">
+  <div class="meals-container">
+    {{user.username}}
+    {{#each user.events}}
+    <div class="meal-card">
+      <a href="/meals/{{_id}}" id='meal-img'><img src="{{this.image}}" alt=""></a><br>
+      <p><a href="/meals/{{_id}}" id='basic-info'>{{this.name}} <br>{{this.price}}</a></p>
+    </div>
+    {{/each}}
+  </div>
+  <div class="map-container">
+    <div id='map'></div>
+  </div>
+</div>
+{{else}}
+<h1>There are no meals to display</h1>
+{{/if}} --}}
