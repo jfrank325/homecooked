@@ -15,7 +15,7 @@ const loginCheck = (req, res, next) => {
   }
 };
 
-//Creating a meal page
+//Show a meals page
 router.get('/meals/create', loginCheck, (req, res) => {
   res.render('meals/meal-form', { loggedIn: req.user });
 });

@@ -19,11 +19,13 @@
     <nav class="navbar">
       <div class="logo"><a href="/"><img src="../images/logopretty.jpg" alt=""></a></div>
       <ul>
+        <li><a class='button-style' href="/meals">Search For a Meal</a></li>
         {{#if user}}
-        <li><a href="/auth/logout">Logout</a></li>
+        <li><a id='create-link' class='button-style' href="/meals/create">Host Your Own Meal </a></li>
+        <li><a class='button-style' href="/auth/logout">Logout</a></li>
         {{else}}
-        <li><a href="/auth/login">Login</a></li>
-        <li><a href="/auth/signup">Signup</a></li>
+        <li><a class='button-style' href="/auth/login">Login</a></li>
+        <li><a class='button-style' href="/auth/signup">Signup</a></li>
         {{/if}}
       </ul>
     </nav>

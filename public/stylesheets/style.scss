@@ -40,6 +40,10 @@ h1 {
   padding: 0 20px;
 }
 
+.navbar li {
+  margin: 0 10px;
+}
+
 .navbar a {
   text-decoration: none;
   padding: 0 20px;
@@ -137,7 +141,6 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
 }
 
 .map-box {
@@ -166,8 +169,33 @@ h1 {
 
 .upload-box {
   display: flex;
+  align-items: center;
 }
 
 #submit {
   padding: 20px 30px;
+}
+
+.details-box {
+  display: flex;
+}
+
+.details-info {
+  display: flex;
+  flex-direction: column;
+  margin-right: 40px;
+}
+
+.details-info img {
+  height: 300px;
+  width: 450px;
+}
+
+.map-confirm-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.map-confirm-box form {
+  margin-top: 40px;
 }

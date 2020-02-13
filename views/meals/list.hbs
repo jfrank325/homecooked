@@ -15,9 +15,9 @@
     <input type="submit" value="Submit">
   </form>
 </div>
-{{#if user}}
+{{!-- {{#if user}}
 <p><a id='create-link' class='button-style' href="/meals/create">Click Here </a>to host your own meal!</p>
-{{/if}}
+{{/if}} --}}
 
 <div class="list-map-box">
 
@@ -70,7 +70,7 @@
       response.data.forEach(el => {
         console.log("yayyy", el.location.coordinates)
         if (el.location.coordinates.length > 0) {
-          //const marker = new mapboxgl.Marker();
+          const marker = new mapboxgl.Marker();
           marker.setLngLat(el.location.coordinates);
           marker.addTo(map);
         }
