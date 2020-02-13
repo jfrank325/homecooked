@@ -21,8 +21,8 @@
 
 <div class="list-map-box">
 
-  <div class="meals-container">
-    <div id="filtered-box">
+  <div id="filtered-box">
+    <div class="meals-container">
       {{#each meals}}
       <div class="meal-card">
         <a href="/meals/{{_id}}" id='meal-img'><img src="{{image}}" alt=""></a><br>
@@ -30,19 +30,14 @@
       </div>
       {{/each}}
     </div>
+    <div class="map-container">
+      <div id='map'></div>
+    </div>
   </div>
   {{else}}
   <h1>There are no meals to display</h1>
   {{/if}}
 
-
-
-
-
-
-
-
-  <div id='map' style='width: 800px; height: 300px;'></div>
 
 </div>
 
