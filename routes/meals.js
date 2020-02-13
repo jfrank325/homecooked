@@ -1,29 +1,48 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const Meal = require('../models/Meal');
-const uploadCloud = require('../config/cloudinary.js');
-const User = require('../models/User');
-const Reviews = require('../models/Reviews');
+const Meal = require("../models/Meal");
+const uploadCloud = require("../config/cloudinary.js");
+const User = require("../models/User");
+const Reviews = require("../models/Reviews");
 
 //login middleware
 const loginCheck = (req, res, next) => {
   if (req.user) {
     next();
   } else {
-    res.redirect('/');
+    res.redirect("/");
   }
 };
 
-//Creating a meal page
-router.get('/meals/create', loginCheck, (req, res) => {
-  res.render('meals/meal-form', { loggedIn: req.user });
+router.post("/meals/confirmation/:id", loginCheck, (req, res, next) => {
+  console.log("TESSSST");
+  const mealId = req.params.id;
+  if(confirmation.length < guests){
+  Meal.findByIdAndUpdate(
+    { _id: mealId },
+    { $addToSet: { confirmation: req.user._id } },
+    { new: true }
+  )
+    .then(meal => {
+      console.log(meal);
+      res.redirect("/");
+    })
+    .catch(err => {
+      next(err);
+    });
+  }
 });
 
-router.get('/meals', (req, res, next) => {
+//Creating a meal page
+router.get("/meals/create", loginCheck, (req, res) => {
+  res.render("meals/meal-form", { loggedIn: req.user });
+});
+
+router.get("/meals", (req, res, next) => {
   Meal.find()
     .then(meals => {
-      res.render('meals/list.hbs', { meals, user: req.user });
+      res.render("meals/list.hbs", { meals, user: req.user });
     })
 
     .catch(err => {
@@ -31,7 +50,7 @@ router.get('/meals', (req, res, next) => {
     });
 });
 //Filtering Meals
-router.get('/filtered/:mealtype', (req, res, next) => {
+router.get("/filtered/:mealtype", (req, res, next) => {
   let foodType = req.params.mealtype;
 
   console.log(foodType);
@@ -44,36 +63,51 @@ router.get('/filtered/:mealtype', (req, res, next) => {
 });
 
 //Create a meal
-router.post('/meals', loginCheck, uploadCloud.single('imgPath'), (req, res, next) => {
-  // const defaultMealImage = 'https://res.cloudinary.com/dv1aih6td/image/upload/v1581345429/Meals/thai_zsh0bk.jpg';
-  const { name, description, foodpreference, mealtype, address, price, date, time, guests } = req.body;
-  console.log(req);
-  const imgPath = req.file.url;
-  console.log(imgPath);
-  const imgName = req.file.originalname;
-  Meal.create({
-    name,
-    description,
-    foodpreference,
-    imgPath,
-    imgName,
-    mealtype,
-    address,
-    price,
-    date,
-    time,
-    guests,
-    host: req.user._id,
-  })
-    .then(() => {
-      res.redirect('/meals');
+router.post(
+  "/meals",
+  loginCheck,
+  uploadCloud.single("imgPath"),
+  (req, res, next) => {
+    // const defaultMealImage = 'https://res.cloudinary.com/dv1aih6td/image/upload/v1581345429/Meals/thai_zsh0bk.jpg';
+    const {
+      name,
+      description,
+      foodpreference,
+      mealtype,
+      address,
+      price,
+      date,
+      time,
+      guests
+    } = req.body;
+    console.log(req);
+    const imgPath = req.file.url;
+    console.log(imgPath);
+    const imgName = req.file.originalname;
+    Meal.create({
+      name,
+      description,
+      foodpreference,
+      imgPath,
+      imgName,
+      mealtype,
+      address,
+      price,
+      date,
+      time,
+      guests,
+      host: req.user._id
     })
-    .catch(err => {
-      next(err);
-    });
-});
+      .then(() => {
+        res.redirect("/meals");
+      })
+      .catch(err => {
+        next(err);
+      });
+  }
+);
 
-router.get('/meals/coordinates', (req, res, next) => {
+router.get("/meals/coordinates", (req, res, next) => {
   Meal.find()
     .then(meals => {
       res.json(meals); // return as a JSON, the array of coordinates
@@ -84,23 +118,23 @@ router.get('/meals/coordinates', (req, res, next) => {
     });
 });
 //Get specific meal
-router.get('/meals/:id', (req, res, next) => {
+router.get("/meals/:id", (req, res, next) => {
   Meal.findById(req.params.id)
     .populate({
-      path: 'host reviews',
+      path: "host reviews",
       populate: {
-        path: 'author',
-      },
+        path: "author"
+      }
     })
     .then(meal => {
       let showDelete = false;
       if (req.user && meal.host._id.toString() === req.user._id.toString()) {
         showDelete = true;
       }
-      res.render('meals/details.hbs', {
+      res.render("meals/details.hbs", {
         meal,
         showDelete,
-        user: req.user,
+        user: req.user
       });
     })
     .catch(err => {
@@ -109,10 +143,10 @@ router.get('/meals/:id', (req, res, next) => {
 });
 
 //Get meal to edit
-router.get('/meals/edit/:id', (req, res, next) => {
+router.get("/meals/edit/:id", (req, res, next) => {
   Meal.findById(req.params.id)
     .then(meal => {
-      res.render('meals/edit', { meal });
+      res.render("meals/edit", { meal });
     })
     .catch(err => {
       next(err);
@@ -120,8 +154,18 @@ router.get('/meals/edit/:id', (req, res, next) => {
 });
 
 //Edit meal
-router.post('/meals/edited', uploadCloud.single('photo'), (req, res, next) => {
-  const { name, description, foodpreference, mealtype, address, price, date, time, guests } = req.body;
+router.post("/meals/edited", uploadCloud.single("photo"), (req, res, next) => {
+  const {
+    name,
+    description,
+    foodpreference,
+    mealtype,
+    address,
+    price,
+    date,
+    time,
+    guests
+  } = req.body;
   console.log(req);
 
   // const imgPath = req.file.url;
@@ -142,15 +186,15 @@ router.post('/meals/edited', uploadCloud.single('photo'), (req, res, next) => {
         date,
         time,
         guests,
-        host: req.user._id,
-      },
+        host: req.user._id
+      }
     },
     {
-      new: true,
+      new: true
     }
   )
     .then(() => {
-      res.redirect('/meals');
+      res.redirect("/meals");
     })
     .catch(err => {
       next(err);
@@ -158,21 +202,21 @@ router.post('/meals/edited', uploadCloud.single('photo'), (req, res, next) => {
 });
 
 //Gets the review
-router.get('/meals/:id/reviews', (req, res, next) => {
-  console.log('Helo bachend');
+router.get("/meals/:id/reviews", (req, res, next) => {
+  console.log("Helo bachend");
   Meal.findById(req.params.id)
     .populate({
-      path: 'reviews',
+      path: "reviews",
       populate: {
-        path: 'author',
-      },
+        path: "author"
+      }
     })
     .then(meal => {
-      console.log('meal', meal);
+      console.log("meal", meal);
       const reviews = meal.reviews.map(review => {
         return {
           content: review.content,
-          author: review.author.username,
+          author: review.author.username
         };
       });
       res.json(reviews);
@@ -183,14 +227,14 @@ router.get('/meals/:id/reviews', (req, res, next) => {
 });
 
 //Creates a review
-router.post('/meals/:id/reviews', loginCheck, (req, res, next) => {
+router.post("/meals/:id/reviews", loginCheck, (req, res, next) => {
   const content = req.body.content;
   const author = req.user._id;
   const mealId = req.params.id;
 
   Reviews.create({
     content,
-    author,
+    author
   })
     .then(reviewDocument => {
       const reviewId = reviewDocument._id;
@@ -205,13 +249,13 @@ router.post('/meals/:id/reviews', loginCheck, (req, res, next) => {
 });
 
 //Deletes specific meal
-router.get('/meals/:id/delete', (req, res, next) => {
+router.get("/meals/:id/delete", (req, res, next) => {
   const query = {
-    _id: req.params.id,
+    _id: req.params.id
   };
   Meal.deleteOne(query)
     .then(() => {
-      res.redirect('/meals');
+      res.redirect("/meals");
     })
     .catch(err => {
       next(err);
@@ -220,7 +264,7 @@ router.get('/meals/:id/delete', (req, res, next) => {
 
 // patching meal location from frontend
 
-router.patch('/meals/:id', (req, res, next) => {
+router.patch("/meals/:id", (req, res, next) => {
   const changes = req.body; // in our axios call on the front-end, we'll make sure to pass the fields that need to be updated
   Meal.updateOne({ _id: req.params.id }, changes)
     .then(() => {
@@ -234,7 +278,7 @@ router.patch('/meals/:id', (req, res, next) => {
 
 // getting meal coordinates
 
-router.get('/meals/:id/coordinates', (req, res, next) => {
+router.get("/meals/:id/coordinates", (req, res, next) => {
   Meal.findById(req.params.id) // retrieve the room from the DB
     .then(mealDocument => {
       res.json(mealDocument.location.coordinates); // return as a JSON, the array of coordinates
@@ -243,5 +287,7 @@ router.get('/meals/:id/coordinates', (req, res, next) => {
       next(err);
     });
 });
+
+// creates new meal booking and updates confirmation
 
 module.exports = router;

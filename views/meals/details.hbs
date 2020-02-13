@@ -34,11 +34,8 @@
 <a href="/meals/edit/{{meal._id}}">Edit this meal</a>
 
 <div id='map' style='width: 800px; height: 300px;'></div>
-
 <div id="confirmation">
-  <form action="/meals/mealID" method="POST">
-    <label for="message">Number of Guests</label>
-    <input type="number" name='guest' id='guest'>
+  <form action="/meals/confirmation/{{meal._id}}" method="post">
     <button type='submit'>Book your meal!</button>
   </form>
 </div>

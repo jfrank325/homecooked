@@ -50,10 +50,12 @@ const mealSchema = new Schema({
     type: Number,
     required: true
   },
-  confirmation: {
-    type: Schema.Types.ObjectId,
-    ref: "User"
-  },
+  confirmation: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    }
+  ],
   location: {
     type: {
       type: String, // Don't do `{ location: { type: String } }`

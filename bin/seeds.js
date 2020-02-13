@@ -156,9 +156,8 @@ mongoose.connect("mongodb://localhost/homecooked", () => {
 const Meal = require("../models/Meal");
 const User = require("../models/User");
 
-
 Meal.collection.drop();
-User.collection.drop()
+User.collection.drop();
 
 meals.forEach(meal => {
   User.create(meal.host)
