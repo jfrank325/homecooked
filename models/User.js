@@ -6,10 +6,14 @@ const userSchema = new Schema(
     username: String,
     password: String,
     photo: String,
+    events: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Meal'
+    }],
     likedRecipes: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Recipe;',
+        ref: 'Recipe',
       },
     ],
   },

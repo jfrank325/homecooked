@@ -1,6 +1,6 @@
 console.log('HELPPP');
 
-document.querySelector('form').onsubmit = event => {
+document.querySelector('#review-form').onsubmit = event => {
   // 0 when the user submits the form
   event.preventDefault();
 

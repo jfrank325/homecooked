@@ -80,7 +80,7 @@
       const popup = new mapboxgl.Popup({ className: "locationpopup" });
       // popup.setLngLat(map.getCenter());
       popup.setHTML(
-        `<div> <a href="/meals/${meal._id}">${location.name}</a></div>`
+        `<div> <a href="/meals">${location.name}</a></div>`
       );
       marker.setPopup(popup);
       marker.on("dragend", data => {
