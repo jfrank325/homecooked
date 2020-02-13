@@ -4,8 +4,7 @@
   font-size: 16px; }
 
 body {
-  padding: 50px;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
   background-image: url("../images/family-style02.jpg");
   background-position: center;
   background-size: cover;
@@ -18,7 +17,7 @@ a {
 h1 {
   text-align: center;
   font-size: 4rem;
-  color: #135312; }
+  color: #60b0f4; }
 
 .navbar {
   display: flex;
@@ -26,12 +25,16 @@ h1 {
   height: 4rem;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0; }
+  padding: 10px 0;
+  background-color: #f1e4e4; }
 
 .navbar ul {
   display: flex;
   list-style-type: none;
   padding: 0 20px; }
+
+.navbar li {
+  margin: 0 10px; }
 
 .navbar a {
   text-decoration: none;
@@ -39,19 +42,25 @@ h1 {
   font-size: 2rem; }
 
 .navbar img {
-  width: 5rem; }
+  width: 10rem; }
 
 .home-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-repeat: no-repeat; }
+  background-repeat: no-repeat;
+  align-items: center; }
+
+.home-container img {
+  width: 45rem;
+  margin-top: 7rem; }
 
 .enter {
   text-align: center;
-  font-size: 6rem;
-  color: #186916;
-  padding-bottom: 5rem; }
+  font-size: 4rem;
+  color: #60b0f4;
+  padding-bottom: 5rem;
+  margin-top: 15rem; }
 
 #filtered-box {
   display: flex;
@@ -91,19 +100,27 @@ h1 {
 
 .meal-card a {
   text-decoration: none;
-  color: #135312;
+  color: #60b0f4;
   font-weight: 800; }
 
 .list-map-box {
   display: flex;
   align-items: flex-start; }
 
-.details-info img {
-  height: 500px; }
-
 #create-link {
   text-align: center;
-  margin: 25px 0; }
+  margin: 25px 0;
+  font-size: 2em;
+  padding: 1.8rem 6rem; }
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0;
+  align-items: center; }
+
+#filtered {
+  margin: 15px 0; }
 
 #map {
   width: 100%;
@@ -113,8 +130,7 @@ h1 {
 .meal-form-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 50%; }
+  align-items: center; }
 
 .map-box {
   width: 50%; }
@@ -125,11 +141,11 @@ h1 {
 
 .label-style {
   font-size: 1.4rem;
-  color: #135312;
+  color: #60b0f4;
   font-weight: 800; }
 
 .button-style {
-  background-color: #135312;
+  background-color: #60b0f4;
   color: white;
   font-weight: 800;
   padding: 10px;
@@ -137,9 +153,42 @@ h1 {
   border-radius: 10px; }
 
 .upload-box {
-  display: flex; }
+  display: flex;
+  align-items: center; }
 
 #submit {
   padding: 20px 30px; }
+
+.details-info img {
+  height: 500px; }
+
+.details-info-box {
+  background-color: #f1e4e4;
+  color: #60b0f4;
+  font-size: 5rem; }
+
+.details-box {
+  display: flex; }
+
+.details-info {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin-right: 40px; }
+
+.details-info-box h2 {
+  font-size: 4rem;
+  margin-bottom: 20px; }
+
+.map-confirm-box {
+  display: flex;
+  flex-direction: column; }
+
+.map-confirm-box form {
+  margin-top: 40px; }
+
+#reviews-box-container {
+  background-color: #f1e4e4;
+  color: #60b0f4; }
 
 /*# sourceMappingURL=style.css.map */

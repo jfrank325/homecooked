@@ -2,13 +2,38 @@
 
 <div class="details-box">
   <div class="details-info">
-    <h2>{{meal.name}}</h2>
-    <h3>Date - {{meal.date}}</h3>
-    <h3>At - {{meal.time}}</h3>
-    <h3>Price (per meal): Euro {{meal.price}}</h3>
-    <p>Description: {{meal.description}}</p>
-    <p>Hosted by {{meal.host.username}}</p>
-    <img src="{{meal.image}}" alt="Image of Your Meal">
+    <div class="img-details-box">
+      <img src="{{meal.image}}" alt="Image of Your Meal">
+    </div>
+    <div class="details-info-box">
+      <h2>{{meal.name}}</h2>
+      <h3>Date - {{meal.date}}</h3>
+      <h3>At - {{meal.time}}</h3>
+      <h3>Price (per meal): Euro {{meal.price}}</h3>
+      <p>Description: {{meal.description}}</p>
+      <p>Hosted by {{meal.host.username}}</p>
+    </div>
+    <div id="reviews-box-container">
+      <h2>Reviews</h2>
+      <div id='review-box'>
+        {{#each meal.reviews}}
+        <p>{{content}} <i>{{author.username}}</i></p>
+        {{/each}}
+      </div>
+
+      {{#if user}}
+      <form>
+        <label for="message">Add a review</label>
+        <input type="text" name='content' id='message'>
+        <button type='submit'>Post Your Review</button>
+      </form>
+      {{/if}}
+
+      {{#if showDelete}}
+      <a href="/meals/{{meal._id}}/delete">Delete this meal</a>
+      <a href="/meals/edit/{{meal._id}}">Edit this meal</a>
+      {{/if}}
+    </div>
   </div>
 
   <h2>Reviews</h2>
@@ -35,11 +60,14 @@
 
 <div id='map' style='width: 800px; height: 300px;'></div>
 <div id="confirmation">
-  <form action="/user/{{meal._id}}/events" method="post">
+  {{#if fullyBooked}}
+  <h1>FULLY BOOKED</h1>
+  {{else}}
+  <form action="/meals/confirmation/{{meal._id}}" method="post">
     <button type='submit'>Book your meal!</button>
   </form>
+  {{/if}}
 </div>
-
 
 <script>
   mapboxgl.accessToken = 'pk.eyJ1Ijoib3poYW5uIiwiYSI6ImNrNmdpNW0wejBtajkzbGxycnZteGtjMXUifQ.yg4KXc_Z4OeyRKcY9rnMtw';

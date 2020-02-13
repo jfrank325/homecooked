@@ -14,11 +14,14 @@ if (document.getElementById('filtered')) {
         filteredBox.innerHTML = '';
         filteredMeals.data.forEach(food => {
           console.log(food);
+          const d = document.createElement('div');
+          d.classList.add('meal-card');
           const a = document.createElement('a');
           a.href = `/meals/${food._id}`;
           a.innerHTML = `<img src=${food.image}></img>${food.name}   Euro ${food.price}`;
-          filteredBox.classList.add('meal-card');
-          filteredBox.appendChild(a);
+          filteredBox.classList.add('meal-container');
+          filteredBox.appendChild(d);
+          d.appendChild(a);
         });
       })
       .catch(err => {
