@@ -6,8 +6,8 @@
 
 body {
   padding: 50px;
-  font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
-  background-image: url('../images/family-style02.jpg');
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url("../images/family-style02.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -54,7 +54,6 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   background-repeat: no-repeat;
 }
 
@@ -67,10 +66,25 @@ h1 {
 
 #filtered-box {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
   flex-direction: row;
+  width: 100vw;
+  // position: relative;
+}
+
+.meals-container {
+  display: flex;
   flex-wrap: wrap;
+  width: 60%;
+  height: 80vh;
+  overflow-y: scroll;
+}
+
+.map-container {
+  position: sticky;
+  width: 40%;
+  height: 100vh;
+  // right: 0;
 }
 
 .meal-card {
@@ -81,7 +95,7 @@ h1 {
   font-size: 2rem;
   margin: 2rem;
   padding: 1rem 1rem;
-  width: 300px;
+  width: 450px;
   height: 300px;
   border: 1px solid grey;
   box-shadow: 5px 5px 4px gray;
@@ -91,14 +105,14 @@ h1 {
 }
 
 .meal-card img {
-  height: 200px;
+  height: 240px;
 }
 
 .meal-card a {
   text-decoration: none;
   color: rgb(19, 83, 18);
   font-weight: 800;
-  font-size: 1.5rem;
+  // font-size: 1.5rem;
 }
 
 .list-map-box {
@@ -116,14 +130,20 @@ h1 {
 }
 
 #map {
-  height: 500px;
-  width: 500px;
+  width: 100%;
+  height: 80vh;
+  border: 5px solid black;
 }
 
 .meal-form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 50%;
+}
+
+.map-box {
+  width: 50%;
 }
 
 .input-field {
