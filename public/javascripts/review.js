@@ -8,14 +8,14 @@ document.querySelector('#review-form').onsubmit = event => {
   // 1 we make an API call to our `POST` `/rooms/:id/comments` -> BACKEND
   console.log('ourmeal id', mealId);
   axios
-    .post(`http://localhost:3000/meals/${mealId}/reviews`, {
+    .post(`/meals/${mealId}/reviews`, {
       content: document.querySelector('input').value,
     })
     .then(() => {
       console.log('first thn');
       // 4 we get the response from our API call (1)
       // 5 we make an API call to our `GET` `/rooms/:id/comments` -> BACKEND
-      return axios.get(`http://localhost:3000/meals/${mealId}/reviews`);
+      return axios.get(`/meals/${mealId}/reviews`);
     })
     .then(response => {
       console.log('response: ', response);

@@ -65,7 +65,7 @@
   map.addControl(geolocate, 'top-right'); // show the controls on top right of the map
   let test = true
 
-  axios.get("http://localhost:3000/meals/coordinates")
+  axios.get("/meals/coordinates")
     .then(response => {
       console.log(response.data)
       const marker = new mapboxgl.Marker();
@@ -92,7 +92,7 @@
       // const mealId = location.pathname.split("/")[2]; })
 
 
-      axios.patch("http://localhost:3000/meals", { coordinates: coord })
+      axios.patch("/meals", { coordinates: coord })
         .then(() => {
           console.log("Meal updated!") //meal is updated here!
         }).catch(err => {

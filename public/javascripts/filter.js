@@ -6,7 +6,7 @@ if (document.getElementById('filtered')) {
     console.log('mealtype value', mealtype);
 
     axios
-      .get(`http://localhost:3000/filtered/${mealtype}`)
+      .get(`/filtered/${mealtype}`)
       .then(filteredMeals => {
         console.log('TEST', filteredMeals.data);
         const filteredBox = document.getElementById('filtered-box');

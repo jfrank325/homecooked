@@ -106,7 +106,7 @@
     let test = true
 
     const mealId = location.pathname.split("/")[2]
-    axios.get(`http://localhost:3000/meals/${mealId}/coordinates`)
+    axios.get(`/meals/${mealId}/coordinates`)
       .then(response => {
         console.log(response);
         let coordinates = response.data;
@@ -121,7 +121,7 @@
           const coord = data.target.coordinates.getLngLat().toArray()
           const mealId = location.pathname.split("/")[2];
 
-          axios.patch(`http://localhost:3000/meals/${mealId}`, { coordinates: coord })
+          axios.patch(`/meals/${mealId}`, { coordinates: coord })
             .then(() => {
               console.log("Meal updated!") //meal is updated here!
             }).catch(err => {
