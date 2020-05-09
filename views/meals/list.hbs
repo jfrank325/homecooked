@@ -14,7 +14,6 @@
     </select>
     <input class='button-style' type="submit" value="Submit">
   </form>
-  <p>Or...</p>
   <a id='create-link' class='button-style' href="/meals/create">Host Your Own Meal </a>
 </div>
 
@@ -29,7 +28,7 @@
       {{#each meals}}
       <div class="meal-card">
         <a href="/meals/{{_id}}" id='meal-img'><img src="{{image}}" alt=""></a><br>
-        <p><a href="/meals/{{_id}}" id='basic-info'>{{name}} <br>{{price}}</a></p>
+        <p><a href="/meals/{{_id}}" id='basic-info'>{{name}} </a></p>
       </div>
       {{/each}}
     </div>
@@ -49,7 +48,7 @@
   const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v10',
-    center: [13.405, 52.52], // starting position
+    center: [13.3603, 52.5373], // starting position
     zoom: 11, // starting zoom
 
   });

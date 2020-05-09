@@ -1,6 +1,4 @@
-console.log('HELPPP');
-
-document.querySelector('#review-form').onsubmit = event => {
+document.querySelector('#review-form').onsubmit = (event) => {
   // 0 when the user submits the form
   event.preventDefault();
 
@@ -17,19 +15,19 @@ document.querySelector('#review-form').onsubmit = event => {
       // 5 we make an API call to our `GET` `/rooms/:id/comments` -> BACKEND
       return axios.get(`/meals/${mealId}/reviews`);
     })
-    .then(response => {
+    .then((response) => {
       console.log('response: ', response);
       // 8 we iterate through the list of comments from the server to manipulate the DOM
       const reviewBox = document.getElementById('review-box');
       reviewBox.innerHTML = '';
-      response.data.forEach(review => {
+      response.data.forEach((review) => {
         const p = document.createElement('p');
         p.innerHTML = `${review.content} <i>${review.author}</i>`;
         reviewBox.appendChild(p);
       });
       document.querySelector('form').reset();
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 };

@@ -1,73 +1,74 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
 
-<div class="details-box">
-  <div class="details-info">
-    <div class="img-details-box">
-      <img src="{{meal.image}}" alt="Image of Your Meal">
-    </div>
-    <div class="details-info-box">
-      <h2>{{meal.name}}</h2>
-      <h3>Date - {{meal.date}}</h3>
-      <h3>Time - {{meal.time}}</h3>
-      <h3>Price (per meal): Euro {{meal.price}}</h3>
-      <p>Description: {{meal.description}}</p>
-      <p>Hosted by {{meal.host.username}}</p>
-    </div>
-
-    {{#if user}}
-    <div id="reviews-box-container">
-      <h2 style='font-size:30px;'>Reviews</h2>
-      <form id="review-form">
-        <label for="message">Add a review</label>
-        <input type="text" name='content' id='message'>
-        <button class='button-style' type='submit'>Post Your Review</button>
-      </form>
-      {{/if}}
-
-      <div id='review-box'>
-        {{#each meal.reviews}}
-        <p>{{content}} -Review by <i>{{author.username}}</i></p>
-        {{/each}}
+<div class="full-container">
+  <div class='details-container'>
+    <div class="details-box">
+      <div class="details-info">
+        <div class="img-details-box">
+          <img src="{{meal.image}}" alt="Image of Your Meal">
+        </div>
+        <div class="details-info-box">
+          <h2>{{meal.name}}</h2>
+          <h3>Date - {{date}}</h3>
+          <h3>Time - {{meal.time}}</h3>
+          <h3>Price (per meal): {{meal.price}}</h3>
+          <p>Description: {{meal.description}}</p>
+          <p>Hosted by {{meal.host.username}}</p>
+        </div>
       </div>
 
+      {{#if user}}
+      <div id="reviews-box-container">
+        <h2 style='font-size:30px;'>Reviews</h2>
+        <form id="review-form">
+          <label for="message">Add a review</label>
+          <input type="text" name='content' id='message'>
+          <button class='button-style' type='submit'>Post Your Review</button>
+        </form>
+        {{/if}}
+
+        <div id='review-box'>
+          {{#each meal.reviews}}
+          <p>{{content}} -Review by <i>{{author.username}}</i></p>
+          {{/each}}
+        </div>
+        <div id="confirmation">
+          {{#if fullyBooked}}
+          <h1>FULLY BOOKED</h1>
+          {{else}}
+          <form action="/meals/confirmation/{{meal._id}}" method="post">
+            <button class='button-style' type='submit'>Book this meal!</button>
+          </form>
+          {{/if}}
+          <div class="edit"> {{#if showDelete}}
+            <a class="button-style" href="/meals/{{meal._id}}/delete">Delete this meal</a>
+            <a class="button-style" href="/meals/edit/{{meal._id}}">Edit this meal</a>
+            {{/if}}
+          </div>
+
+        </div>
+      </div>
     </div>
-  </div>
+
+    <div class="map-confirm-box">
 
 
-  <div class="map-confirm-box">
-    <div id="confirmation">
-      {{#if fullyBooked}}
-      <h1>FULLY BOOKED</h1>
-      {{else}}
-      <form action="/meals/confirmation/{{meal._id}}" method="post">
-        <button class='button-style' style='width:250px; font-size:30px;' type='submit'>Book this meal!</button>
-      </form>
-      {{/if}}
+      <div class="map-box">
+        <div id='map' style='width: 500px; height: 700px;'></div>
+      </div>
+
+
     </div>
-    {{!-- <div class="map-confirm-box">
-    <div id="confirmation">
-      <form action="/meals/mealID" method="POST">
-        <label for="message">Number of Guests</label>
-        <input class='select-style' type="number" name='guest' id='guest'>
-        <button class='button-style' type='submit'>Book your meal!</button>
-      </form>
-    </div> --}}
-    <div class="map-box">
-      <div id='map' style='width: 800px; height: 300px;'></div>
-    </div>
-    {{#if showDelete}}
-    <a class="button-style" href="/meals/{{meal._id}}/delete">Delete this meal</a>
-    <a class="button-style" href="/meals/edit/{{meal._id}}">Edit this meal</a>
-    {{/if}}
   </div>
-  {{!-- <h2>Reviews</h2>
+</div>
+{{!-- <h2>Reviews</h2>
   <div id='review-box'>
     {{#each meal.reviews}}
     <p>{{content}} <i>{{author.username}}</i></p>
     {{/each}}
   </div> --}}
 
-  {{!-- {{#if user}}
+{{!-- {{#if user}}
     <form id="review-form">
       <label for="message">Add a review</label>
       <input type="text" name='content' id='message'>
@@ -75,61 +76,61 @@
     </form>
     {{/if}} --}}
 
-  {{!-- {{#if showDelete}}
+{{!-- {{#if showDelete}}
   <a href="/meals/{{meal._id}}/delete">Delete this meal</a>
 
   {{/if}}
-</div>
+
 <a href="/meals/edit/{{meal._id}}">Edit this meal</a> --}}
 
 
 
 
-  <script>
-    mapboxgl.accessToken = 'pk.eyJ1Ijoib3poYW5uIiwiYSI6ImNrNmdpNW0wejBtajkzbGxycnZteGtjMXUifQ.yg4KXc_Z4OeyRKcY9rnMtw';
-    const map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/dark-v10',
-      center: [13.405, 52.52], // starting position
-      zoom: 9, // starting zoom
-    });
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1Ijoib3poYW5uIiwiYSI6ImNrNmdpNW0wejBtajkzbGxycnZteGtjMXUifQ.yg4KXc_Z4OeyRKcY9rnMtw';
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/dark-v10',
+    center: [13.405, 52.52], // starting position
+    zoom: 9, // starting zoom
+  });
 
-    // Add zoom and rotation controls to the map.
-    map.addControl(new mapboxgl.NavigationControl());
+  // Add zoom and rotation controls to the map.
+  map.addControl(new mapboxgl.NavigationControl());
 
-    const geolocate = new mapboxgl.GeolocateControl({
-      showUserLocation: false,
-      trackUserLocation: true
-    })
+  const geolocate = new mapboxgl.GeolocateControl({
+    showUserLocation: false,
+    trackUserLocation: true
+  })
 
-    map.addControl(geolocate, 'top-right'); // show the controls on top right of the map
-    let test = true
+  map.addControl(geolocate, 'top-right'); // show the controls on top right of the map
+  let test = true
 
-    const mealId = location.pathname.split("/")[2]
-    axios.get(`/meals/${mealId}/coordinates`)
-      .then(response => {
-        console.log(response);
-        let coordinates = response.data;
-        if (!coordinates.length) {
-          coordinates = map.getCenter();
-        }
-        const marker = new mapboxgl.Marker(); //  you can put draggable: true inside
-        marker.setLngLat(coordinates);
-        marker.addTo(map);
+  const mealId = location.pathname.split("/")[2]
+  axios.get(`/meals/${mealId}/coordinates`)
+    .then(response => {
+      console.log(response);
+      let coordinates = response.data;
+      if (!coordinates.length) {
+        coordinates = map.getCenter();
+      }
+      const marker = new mapboxgl.Marker(); //  you can put draggable: true inside
+      marker.setLngLat(coordinates);
+      marker.addTo(map);
 
-        marker.on("dragend", (data) => {
-          const coord = data.target.coordinates.getLngLat().toArray()
-          const mealId = location.pathname.split("/")[2];
+      marker.on("dragend", (data) => {
+        const coord = data.target.coordinates.getLngLat().toArray()
+        const mealId = location.pathname.split("/")[2];
 
-          axios.patch(`/meals/${mealId}`, { coordinates: coord })
-            .then(() => {
-              console.log("Meal updated!") //meal is updated here!
-            }).catch(err => {
-              console.log(err);
-            })
-        })
+        axios.patch(`/meals/${mealId}`, { coordinates: coord })
+          .then(() => {
+            console.log("Meal updated!") //meal is updated here!
+          }).catch(err => {
+            console.log(err);
+          })
       })
-  </script>
+    })
+</script>
 
 
-  <script src='/javascripts/review.js'></script>
+<script src='/javascripts/review.js'></script>

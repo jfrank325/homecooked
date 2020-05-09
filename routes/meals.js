@@ -18,12 +18,12 @@ const loginCheck = (req, res, next) => {
 router.get('/meals/myevents', loginCheck, (req, res, next) => {
   User.findById(req.user._id)
     .populate('events')
-    .then(user => {
+    .then((user) => {
       res.render('../views/meals/profile.hbs', {
         user,
       });
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
@@ -32,13 +32,13 @@ router.post('/meals/confirmation/:id', loginCheck, (req, res, next) => {
   console.log('TESSSST');
   const mealId = req.params.id;
 
-  Meal.findById(mealId).then(meal => {
+  Meal.findById(mealId).then((meal) => {
     console.log('TEST', meal);
     if (meal.confirmation.length < meal.guests) {
       Meal.findByIdAndUpdate({ _id: mealId }, { $addToSet: { confirmation: req.user._id } }, { new: true }).then(
-        meal => {
+        (meal) => {
           console.log(meal);
-          User.findByIdAndUpdate(req.user._id, { $addToSet: { events: meal._id } }, { new: true }).then(user => {
+          User.findByIdAndUpdate(req.user._id, { $addToSet: { events: meal._id } }, { new: true }).then((user) => {
             res.redirect('/meals/myevents');
           });
         }
@@ -63,24 +63,25 @@ router.get('/meals/create', loginCheck, (req, res) => {
 
 router.get('/meals', (req, res, next) => {
   Meal.find()
-    .then(meals => {
+    .then((meals) => {
       res.render('meals/list.hbs', { meals, user: req.user });
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
+
 //Filtering Meals
 router.get('/filtered/:mealtype', (req, res, next) => {
   let foodType = req.params.mealtype;
 
   console.log(foodType);
   Meal.find({ mealtype: foodType })
-    .then(meals => {
+    .then((meals) => {
       console.log(meals);
       res.json(meals);
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 });
 
 //Create a meal
@@ -109,21 +110,22 @@ router.post('/meals', loginCheck, uploadCloud.single('imgPath'), (req, res, next
     .then(() => {
       res.redirect('/meals');
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
 
 router.get('/meals/coordinates', (req, res, next) => {
   Meal.find()
-    .then(meals => {
+    .then((meals) => {
       res.json(meals); // return as a JSON, the array of coordinates
     })
 
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
+
 //Get specific meal
 router.get('/meals/:id', (req, res, next) => {
   Meal.findById(req.params.id)
@@ -133,7 +135,7 @@ router.get('/meals/:id', (req, res, next) => {
         path: 'author',
       },
     })
-    .then(meal => {
+    .then((meal) => {
       let showDelete = false;
       if (req.user && meal.host._id.toString() === req.user._id.toString()) {
         showDelete = true;
@@ -144,6 +146,7 @@ router.get('/meals/:id', (req, res, next) => {
         console.log('FULLY BOOKED');
         fullyBooked = true;
       }
+
       res.render('meals/details.hbs', {
         meal,
         showDelete,
@@ -151,7 +154,7 @@ router.get('/meals/:id', (req, res, next) => {
         user: req.user,
       });
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
@@ -159,10 +162,10 @@ router.get('/meals/:id', (req, res, next) => {
 //Get meal to edit
 router.get('/meals/edit/:id', (req, res, next) => {
   Meal.findById(req.params.id)
-    .then(meal => {
+    .then((meal) => {
       res.render('meals/edit', { meal });
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
@@ -178,28 +181,38 @@ router.post('/meals/edited/:id', uploadCloud.single('photo'), async (req, res, n
   Meal.findByIdAndUpdate(
     { _id: mealId },
     {
-      $set: {
-        name,
-        description,
-        foodpreference,
-        image: imagePath,
-        mealtype,
-        address,
-        price,
-        date,
-        time,
-        guests,
-        host: req.user._id,
-      },
-    },
-    {
-      new: true,
+      $set: Meal.findByIdAndUpdate(
+        { _id: mealId },
+        {
+          $set: {
+            name,
+            description,
+            foodpreference,
+            image: imagePath,
+            mealtype,
+            name,
+            description,
+            foodpreference,
+            image: imagePath,
+            mealtype,
+            address,
+            price,
+            date,
+            time,
+            guests,
+            host: req.user._id,
+          },
+        },
+        {
+          new: true,
+        }
+      ),
     }
   )
     .then(() => {
       res.redirect('/meals');
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
@@ -214,9 +227,9 @@ router.get('/meals/:id/reviews', (req, res, next) => {
         path: 'author',
       },
     })
-    .then(meal => {
+    .then((meal) => {
       console.log('meal', meal);
-      const reviews = meal.reviews.map(review => {
+      const reviews = meal.reviews.map((review) => {
         return {
           content: review.content,
           author: review.author.username,
@@ -224,7 +237,7 @@ router.get('/meals/:id/reviews', (req, res, next) => {
       });
       res.json(reviews);
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
@@ -239,14 +252,14 @@ router.post('/meals/:id/reviews', loginCheck, (req, res, next) => {
     content,
     author,
   })
-    .then(reviewDocument => {
+    .then((reviewDocument) => {
       const reviewId = reviewDocument._id;
       return Meal.updateOne({ _id: mealId }, { $push: { reviews: reviewId } });
     })
     .then(() => {
       res.json({});
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
@@ -260,7 +273,7 @@ router.get('/meals/:id/delete', (req, res, next) => {
     .then(() => {
       res.redirect('/meals');
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
@@ -274,7 +287,7 @@ router.patch('/meals/:id', (req, res, next) => {
       // successful update, we can send a response
       res.json();
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
@@ -282,11 +295,11 @@ router.patch('/meals/:id', (req, res, next) => {
 // getting meal coordinates for one event
 
 router.get('/meals/:id/coordinates', (req, res, next) => {
-  Meal.findById(req.params.id) // retrieve the room from the DB
-    .then(mealDocument => {
+  Meal.findById(req.params.id) // retrieve the meal from the DB
+    .then((mealDocument) => {
       res.json(mealDocument.location.coordinates); // return as a JSON, the array of coordinates
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
@@ -295,10 +308,10 @@ router.get('/meals/:id/coordinates', (req, res, next) => {
 
 router.get('/meals/coordinates', (req, res, next) => {
   Meal.find()
-    .then(locations => {
+    .then((locations) => {
       res.json(locations.location);
     })
-    .catch(err => {
+    .catch((err) => {
       next(err);
     });
 });
