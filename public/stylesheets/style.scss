@@ -22,11 +22,19 @@ body {
   font-family: 'Ubuntu';
   letter-spacing: 0.01rem;
   font-weight: 700;
-  background-image: url('../images/family-styleO.jpg');
+  background-color: var(--pink);
   // background-color: whitesmoke;
+  // background-position: center;
+  // background-size: cover;
+  // background-repeat: no-repeat;
+}
+
+.wrapper {
+  background-image: url('../images/family-styleO.jpg');
   background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
+  padding-bottom: 15rem;
+  // background-repeat: no-repeat;
 }
 
 a {
@@ -82,7 +90,7 @@ h1 {
 
 .home-container img {
   width: 45rem;
-  margin-top: 7rem;
+  margin-top: 15rem;
   transition: transform 0.7s ease-out;
 }
 
@@ -102,11 +110,6 @@ h1 {
 #filtered-box {
   display: flex;
   justify-content: space-evenly;
-  // overflow-x: hidden;
-  // flex-direction: row;
-  // flex-wrap: wrap;
-  // width: 100vw;
-  // position: relative;
 }
 
 .meals-container {
@@ -122,20 +125,14 @@ h1 {
   display: none;
 }
 
-.map-container {
-  position: sticky;
-  width: 30rem;
-  height: 35rem;
-
-  // height: 100vh;
-  // right: 0;
-}
-
 #map {
   width: 100%;
   height: 100%;
   border: 5px solid rgb(56, 56, 56);
   border-radius: 10px;
+  width: 35rem;
+  height: 35rem;
+  margin-bottom: 2rem;
 }
 
 .meal-card {
@@ -146,8 +143,8 @@ h1 {
   font-size: 2rem;
   margin: 1rem;
   padding: 1rem 1rem;
-  width: 300px;
-  height: 300px;
+  width: 18rem;
+  height: 17rem;
   border: 1px solid grey;
   box-shadow: 5px 5px 4px gray;
   // background-color: rgba(119, 221, 119, 0.1);
@@ -162,14 +159,15 @@ h1 {
 }
 
 .meal-card img {
-  height: 200px;
+  height: 13rem;
+  width: 18rem;
   border-radius: 10px;
 }
 
 .meal-card a {
   text-decoration: none;
   color: var(--sky);
-  font-weight: 800;
+  // font-weight: 800;
   // font-size: 1.5rem;
 }
 
@@ -225,10 +223,6 @@ h1 {
   width: 60%;
 }
 
-// .map-box {
-// width: 50%;
-// }
-//
 .in-box {
   display: flex;
 }
@@ -250,7 +244,7 @@ h1 {
   color: white;
   font-weight: 700;
   padding: 0.3rem 0.6rem;
-  margin: 20px 0;
+  margin: 1rem;
   border-radius: 10px;
   box-shadow: 2px 2px 2px gray;
   transition: color 0.6s ease-out;
@@ -274,6 +268,8 @@ h1 {
   display: flex;
   padding-top: 2%;
   justify-content: space-evenly;
+  flex-direction: row;
+  padding-bottom: 10%;
 }
 
 .details-box {
@@ -290,12 +286,11 @@ h1 {
 }
 
 .details-info img {
-  height: 400px;
+  height: 20rem;
 }
 
 .details-info-box {
   background-color: var(--sand);
-  // width: 400px;
   color: var(--sky);
   font-size: 20px;
   padding-left: 1rem;
@@ -307,7 +302,7 @@ h3 {
 }
 
 .details-info-box p {
-  font-size: 15px;
+  // font-size: 15px;
   // margin: 10px 0;
   color: var(--sky);
 }
@@ -343,9 +338,6 @@ h3 {
   margin-top: 40px;
 }
 
-.map-box {
-  height: 500px;
-}
 #reviews-box-container {
   background-color: var(--sand);
   color: var(--sky);
@@ -411,4 +403,59 @@ h3 {
   font-weight: 500;
   font-family: Ubuntu;
   font-size: 1.2rem;
+}
+
+@media screen and (max-width: 1024px) {
+  * {
+    font-size: 8px;
+  }
+
+  .wrapper {
+    padding-bottom: 4rem;
+  }
+
+  .full-container {
+    display: flex;
+    padding-top: 2%;
+    flex-direction: column-reverse;
+    justify-content: space-evenly;
+  }
+
+  #map {
+    width: 30rem;
+    height: 25rem;
+  }
+
+  .meal-card {
+    width: 25rem;
+    height: 20rem;
+  }
+
+  .meal-card img {
+    height: 16rem;
+    width: 24rem;
+    border-radius: 10px;
+  }
+
+  #filtered-box {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .meals-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .map-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .details-info {
+    width: 30rem;
+    flex-direction: column;
+    justify-content: center;
+  }
 }

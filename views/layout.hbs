@@ -15,26 +15,28 @@
 </head>
 
 <body>
-  <div class='nav-container'>
-    <nav class="navbar">
-      <div class="logo"><a href="/"><img src="../images/HomeCooked.png" alt=""></a></div>
-      <ul>
-        {{!-- <li><a href="/meals">Search For a Meal</a></li> --}}
-        {{#if user}}
-        <li><a href="/meals/myevents">My Meals</a></li>
-        <li><a href="/auth/logout">Logout</a></li>
-        {{else}}
-        <li><a href="/auth/login">Login</a></li>
-        <li><a href="/auth/signup">Signup</a></li>
-        {{/if}}
-      </ul>
-    </nav>
+  <div class="wrapper">
+    <div class='nav-container'>
+      <nav class="navbar">
+        <div class="logo"><a href="/"><img src="../images/HomeCooked.png" alt=""></a></div>
+        <ul>
+          {{!-- <li><a href="/meals">Search For a Meal</a></li> --}}
+          {{#if user}}
+          <li><a href="/meals/myevents">My Meals</a></li>
+          <li><a href="/auth/logout">Logout</a></li>
+          {{else}}
+          <li><a href="/auth/login">Login</a></li>
+          <li><a href="/auth/signup">Signup</a></li>
+          {{/if}}
+        </ul>
+      </nav>
+    </div>
+    {{{body}}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="/javascripts/date.js"></script>
+    <script src="/javascripts/script.js"></script>
+    <script src="/javascripts/filter.js"></script>
   </div>
-  {{{body}}}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-  <script src="/javascripts/date.js"></script>
-  <script src="/javascripts/script.js"></script>
-  <script src="/javascripts/filter.js"></script>
 </body>
 
 </html>
