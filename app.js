@@ -14,11 +14,14 @@ const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 
 mongoose
-  .connect(process.env.MONGODB_URI || 'mongodb://localhost/homecooked', { useNewUrlParser: true })
-  .then(x => {
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost/homecooked', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((x) => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
   })
-  .catch(err => {
+  .catch((err) => {
     console.error('Error connecting to mongo', err);
   });
 
