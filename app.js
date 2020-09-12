@@ -14,7 +14,7 @@ const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 
 mongoose
-  .connect(process.env.MONGODB_URI || 'mongodb://localhost/homecooked', {
+  .connect(process.env.MONGOLAB_URI || 'mongodb://localhost/homecooked', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

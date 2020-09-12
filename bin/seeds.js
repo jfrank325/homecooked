@@ -140,7 +140,7 @@ const meals = [
 
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/homecooked', () => {
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/homecooked', () => {
   console.log('Connected to DB');
 });
 
@@ -150,17 +150,17 @@ const User = require('../models/User');
 Meal.collection.drop();
 User.collection.drop();
 
-meals.forEach(meal => {
+meals.forEach((meal) => {
   User.create(meal.host)
-    .then(userDoc => {
+    .then((userDoc) => {
       meal.host = userDoc._id;
       console.log('Created an host: ', userDoc.username);
       return Meal.create({ ...meal, host: userDoc._id });
     })
-    .then(mealDoc => {
+    .then((mealDoc) => {
       console.log('Created a meal: ', mealDoc.name);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
     });
 });
